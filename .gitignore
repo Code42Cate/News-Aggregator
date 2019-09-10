@@ -4,3 +4,5 @@ include
 lib
 loca
 share
+__pycache__
+dataset.csv

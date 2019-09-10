@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Newsletter</title>
+    <meta charset="utf-8"/>
+</head>
+
+<body>
+    <h2>News:</h2>
+
+    <table style="width:60%; text-align: left;">
+        {% for article in articles %}
+        <tr>
+            <td><a href="{{article.url}}">{{article.title}}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</body>
+
+</html>
