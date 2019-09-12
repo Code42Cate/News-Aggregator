@@ -4,7 +4,7 @@ from jinja2 import Template
 # This function should not overwrite all the existing dataset,
 # but rather append it and sort out the duplicates before doing so
 def articles_to_csv(articles_tuple):
-    with open("dataset.csv", encoding="utf8") as f:
+    with open("dataset.csv", "w", encoding="utf8") as f:
         for url, title in articles_tuple:
             f.write('"{}","{}"'.format(title.replace(
                 "\n", "").replace('"', "'"), url))
