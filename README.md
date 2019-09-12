@@ -42,3 +42,12 @@ Sites that I am planning on adding:
     https://time.com/section/tech
     https://www.bbc.com/news/technology
     https://www.cnet.com/topics/tech-industry/
+
+## You want to add your own scrapers for your favourite site?
+All the scrapers are in the `scraper/` directory.
+
+If you want to add another scraper, all you need to do is make a class which inherits from SiteScraper and implement the scrape() method. The scraper will be dynamically used by scrape.py.
+
+If you need inspiration, take a look at the existing scrapers. Some use RSS Feeds (wired_scraper.py), some json (reddot_scraper.py) and the others beautifulsoup.
+
+Before you push, make sure they work with the providing unit tests!:)
