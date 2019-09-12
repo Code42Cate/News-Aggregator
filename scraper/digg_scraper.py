@@ -19,4 +19,3 @@ class DiggScraper(SiteScraper):
 
     def get_articles(self):
         return super().get_articles()
-
