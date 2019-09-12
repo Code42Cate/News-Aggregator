@@ -11,7 +11,7 @@ class TheNextWebScraper(SiteScraper):
         root = ET.fromstring(page.text)
         for item in root.find("channel").findall("item"):
             result_list.append(
-                (item.find("title").text, item.find("link").text))
+                (item.find("link").text, item.find("title").text))
         self.__update_articles(result_list)
         return self
 

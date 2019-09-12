@@ -29,7 +29,7 @@ class WiredScraper(SiteScraper):
                 root = ET.fromstring(article_result)
                 for item in root.find("channel").findall("item"):
                     result_list.append(
-                        (item.find("title").text, item.find("link").text))
+                        (item.find("link").text, item.find("title").text))
 
     def __update_articles(self, articles):
         self.articles = articles
