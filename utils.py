@@ -40,3 +40,16 @@ def articles_to_vocabulary(articles_tuple):
         for word in vocabulary:
             vocabulary_file.write("{}\n".format(word))
     print(vocabulary)
+
+# It's in O(n²) and not stable, but hey at least its in-place!
+# I am pretty sure that you _could_ do that in something like O(2n) aka O(n)
+# But since our n will never be that big (Until now we didnt get over n = 300),
+# I think that is good enough and everything else would be over-engineering
+def remove_duplicates(articles):
+    for url, title in articles:
+        articles.remove((url, title)) 
+        for url1, title1 in articles:
+            if url1 == url:
+                articles.remove((url1, title1))
+        articles.append((url, title))
+    return articles
