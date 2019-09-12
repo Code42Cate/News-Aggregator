@@ -1,6 +1,7 @@
 from jinja2 import Template
 
-
+# This function should not overwrite all the existing dataset,
+# but rather append it and sort out the duplicates before doing so
 def articles_to_csv(articles_tuple):
     with open("dataset.csv", encoding="utf8") as f:
         for url, title in articles_tuple:
@@ -23,6 +24,8 @@ def get_stopwords():
     with open("stopwords.txt", "r") as stopwords_file:
         return stopwords_file.read().split("\n")
 
+# This function should do some more clean up. After the first iteration I found words like:
+# "if it, letâs
 
 def articles_to_vocabulary(articles_tuple):
     vocabulary = []
