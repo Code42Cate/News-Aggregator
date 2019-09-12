@@ -1,3 +1,4 @@
+# encoding:utf-8
 from jinja2 import Template
 
 # This function should not overwrite all the existing dataset,
