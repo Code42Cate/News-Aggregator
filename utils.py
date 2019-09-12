@@ -1,6 +1,13 @@
 from jinja2 import Template
 
 
+def articles_to_csv(articles_tuple):
+    with open("dataset.csv", encoding="utf8") as f:
+        for url, title in articles_tuple:
+            f.write('"{}","{}"'.format(title.replace(
+                "\n", "").replace('"', "'"), url))
+
+
 def articles_to_html(articles_tuple):
     template_string = ""
     with open("newsletter_template.html", "r") as f:
