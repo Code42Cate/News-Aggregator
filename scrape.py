@@ -1,6 +1,6 @@
 from scraper import (HackerNoonScraper, xkcdScraper, HackerNewsScraper,
                      RedditScraper, TechCrunchScraper, TechRepublicScraper, YCombinatorScraper)
-from utils import articles_to_html
+import utils
 
 def aggregate():
 
@@ -11,7 +11,12 @@ def aggregate():
     for scraper in scraper_list:
         articles.extend(scraper.scrape().get_articles())
 
-    articles_to_html(articles)
+    for url, title in articles:
+        print('"{}","{}"'.format(title.replace("\n", "").replace('"', "'"), url))
+
+    utils.articles_to_html(articles)
+    utils.articles_to_vocabulary(articles)
+    utils.articles_to_csv(articles)
 
 if __name__ == "__main__":
     aggregate()
