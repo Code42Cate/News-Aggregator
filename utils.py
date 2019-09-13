@@ -67,3 +67,14 @@ def remove_duplicates(articles):
             visited.add(title)
             without_duplicates.append((url, title))
     return without_duplicates
+
+
+def filter_by_keywords(articles, keywords):
+    # I am sure there is a more pythonic way for this
+    relevant_articles = []
+    for url, title in articles:
+        for keyword in keywords:
+            if keyword.lower() in title.lower():
+                relevant_articles.append((url, title))
+                break
+    return relevant_articles
