@@ -6,7 +6,7 @@ from jinja2 import Template
 def articles_to_csv(articles_tuple):
     with open("dataset.csv", "w", encoding="utf8") as f:
         for url, title in articles_tuple:
-            f.write('"{}","{}"'.format(title.replace(
+            f.write('"{}","{}"\n'.format(title.replace(
                 "\n", "").replace('"', "'"), url))
 
 
