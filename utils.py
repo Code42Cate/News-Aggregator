@@ -1,13 +1,24 @@
 # encoding:utf-8
 from jinja2 import Template
+import csv
 
-# This function should not overwrite all the existing dataset,
-# but rather append it and sort out the duplicates before doing so
+
 def articles_to_csv(articles_tuple):
+
+    dataset_file = ""
+    with open("dataset.csv", "r") as f:
+        dataset_file = f.read().split("\n")
+    csv_dataset = csv.reader(dataset_file)
+    for row in csv_dataset:
+        if len(row) == 2:
+            articles_tuple.append((row[1], row[0]))
+
+    articles_tuple = remove_duplicates(articles_tuple)
+
     with open("dataset.csv", "w", encoding="utf8") as f:
         for url, title in articles_tuple:
             f.write('"{}","{}"\n'.format(title.replace(
-                "\n", "").replace('"', "'"), url))
+                "\n", "").replace('"', "'").strip(), url))
 
 
 def articles_to_html(articles_tuple):
@@ -28,6 +39,7 @@ def get_stopwords():
 # This function should do some more clean up. After the first iteration I found words like:
 # "if it, letâs
 
+
 def articles_to_vocabulary(articles_tuple):
     vocabulary = []
     stopwords = get_stopwords()
@@ -45,15 +57,13 @@ def articles_to_vocabulary(articles_tuple):
             vocabulary_file.write("{}\n".format(word))
     print(vocabulary)
 
-# It's in O(n²) and not stable, but hey at least its in-place!
-# I am pretty sure that you _could_ do that in something like O(2n) aka O(n)
-# But since our n will never be that big (Until now we didnt get over n = 300),
-# I think that is good enough and everything else would be over-engineering
+
 def remove_duplicates(articles):
+    visited = set()
+    without_duplicates = []
+
     for url, title in articles:
-        articles.remove((url, title)) 
-        for url1, title1 in articles:
-            if url1 == url:
-                articles.remove((url1, title1))
-        articles.append((url, title))
-    return articles
+        if not title in visited:
+            visited.add(title)
+            without_duplicates.append((url, title))
+    return without_duplicates
