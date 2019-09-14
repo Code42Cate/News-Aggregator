@@ -6,3 +6,9 @@ from .reddit_scraper import RedditScraper
 from .techcrunch_scraper import TechCrunchScraper
 from .techrepublic_scraper import TechRepublicScraper
 from .ycombinator_scraper import YCombinatorScraper
+from .digg_scraper import DiggScraper
+from .readwrite_scraper import ReadWriteScraper
+from .slashdot_scraper import SlashDotScraper
+from .thenextweb_scraper import TheNextWebScraper
+from .wired_scraper import WiredScraper
+from .techradar_scraper import TechRadarScraper
