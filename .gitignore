@@ -7,3 +7,4 @@ share
 __pycache__
 dataset*.csv
 newsletter.html
+.VSCodeCounter
