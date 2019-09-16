@@ -8,3 +8,5 @@ __pycache__
 dataset*.csv
 newsletter.html
 .VSCodeCounter
+*.pyc
+*/*.pyc
