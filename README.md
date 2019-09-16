@@ -10,38 +10,22 @@ The results of getting into a bubble where, that I only got the most boring main
 
 ### Okay, enough rant. We have a problem? Whats the solution?
 ### Let's build our own news aggregator!
-
-Sites that are currently supported: (Mostly the tech categories)
-- Hackernews
-- Hackernoon
-- Reddit
-- TechCrunch
-- TechRepublic
-- Wired
-- XKCD
-- yCombinator
-- Slashdot
-- Digg
-- Readwrite
-- thenextweb
-- Techradar
-
-Sites that I am planning on adding:
-
-    https://www.theverge.com/
-    https://mashable.com/?europe=true
-    https://www.engadget.com
-    https://arstechnica.com/
-    https://www.vox.com/recode
-    https://www.makeuseof.com/
-    https://techmeme.com/
-    https://www.buzzfeednews.com/section/tech
-    https://www.inquisitr.com/category/tech/
-    https://www.businessinsider.com/sai?IR=T
-    https://www.nytimes.com/section/technology
-    https://time.com/section/tech
-    https://www.bbc.com/news/technology
-    https://www.cnet.com/topics/tech-industry/
+|Supported Sites|Planned Additional Sites|
+|---|---|
+|Hackernews|The Verge|
+|Hackernoon|Mashable|
+|Reddit|Engadget|
+|TechCrunch|ArsTechnica|
+|TechRepublic|Vox|
+|Wired|MakeUseOf|
+|XKCD|TechMeme|
+|yCombinator|Buzzfeednews|
+|Slashdot|Inquisitr|
+|Digg|businessInsider|
+|ReadWrite|nytimes|
+|thenextweb|time|
+|Techradar|bbc|
+||cnet|
 
 ## TODO:
 
