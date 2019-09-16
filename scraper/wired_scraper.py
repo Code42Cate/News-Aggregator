@@ -7,18 +7,20 @@ import xml.etree.ElementTree as ET
 
 class WiredScraper(SiteScraper):
     def scrape(self):
+
         rss_feeds = ["https://www.wired.com/feed/category/security/latest/rss",
                      "https://www.wired.com/feed/category/science/latest/rss", "https://www.wired.com/feed/category/business/latest/rss", "https://www.wired.com/feed/rss", "https://www.wired.com/feed/category/ideas/latest/rss", "https://www.wired.com/feed/category/backchannel/latest/rss"]
-
-        loop = asyncio.get_event_loop()
-        tasks = []
         result_list = []
-        for rss in rss_feeds:
-            task = asyncio.ensure_future(
-                self.__async_scrape(rss, result_list))
-            tasks.append(task)
-        loop.run_until_complete(asyncio.wait(tasks))
-
+        try:
+            loop = asyncio.get_event_loop()
+            tasks = []
+            for rss in rss_feeds:
+                task = asyncio.ensure_future(
+                    self.__async_scrape(rss, result_list))
+                tasks.append(task)
+            loop.run_until_complete(asyncio.wait(tasks))
+        except Exception as e:
+            print(str(e))
         self.__update_articles(result_list)
         return self
 

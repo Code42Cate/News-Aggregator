@@ -6,12 +6,15 @@ from bs4 import BeautifulSoup
 class TechRadarScraper(SiteScraper):
 
     def scrape(self):
-        page = requests.get("https://www.techradar.com")
-        soup = BeautifulSoup(page.text, features="lxml")
-        headlines = [x["aria-label"]
-                     for x in soup.find_all("a", "article-link")]
-        links = [x["href"] for x in soup.find_all("a", "article-link")]
-        self.__update_articles(list(zip(links, headlines)))
+        try:
+            page = requests.get("https://www.techradar.com")
+            soup = BeautifulSoup(page.text, features="lxml")
+            headlines = [x["aria-label"]
+                         for x in soup.find_all("a", "article-link")]
+            links = [x["href"] for x in soup.find_all("a", "article-link")]
+            self.__update_articles(list(zip(links, headlines)))
+        except Exception as e:
+            print(str(e))
         return self
 
     # This should eventually already kill duplicates
@@ -20,4 +23,3 @@ class TechRadarScraper(SiteScraper):
 
     def get_articles(self):
         return super().get_articles()
-

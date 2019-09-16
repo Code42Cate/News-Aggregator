@@ -6,10 +6,13 @@ import requests
 class xkcdScraper(SiteScraper):
     def scrape(self):
         list = []
-        r = requests.get("https://xkcd.com")
-        soup = BeautifulSoup(r.text, features="lxml")
-        list.append((soup.find("meta",  property="og:url")
-                     ["content"], "Daily XKCD"))
+        try:
+            r = requests.get("https://xkcd.com")
+            soup = BeautifulSoup(r.text, features="lxml")
+            list.append((soup.find("meta",  property="og:url")
+                         ["content"], "Daily XKCD"))
+        except Exception as e:
+            print(str(e))
         self.__update_articles(list)
         return self
 

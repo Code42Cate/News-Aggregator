@@ -6,12 +6,15 @@ import xml.etree.ElementTree as ET
 class TheNextWebScraper(SiteScraper):
 
     def scrape(self):
-        page = requests.get("https://thenextweb.com/feed/")
         result_list = []
-        root = ET.fromstring(page.text)
-        for item in root.find("channel").findall("item"):
-            result_list.append(
-                (item.find("link").text, item.find("title").text))
+        try:
+            page = requests.get("https://thenextweb.com/feed/")
+            root = ET.fromstring(page.text)
+            for item in root.find("channel").findall("item"):
+                result_list.append(
+                    (item.find("link").text, item.find("title").text))
+        except Exception as e:
+            print(str(e))
         self.__update_articles(result_list)
         return self
 

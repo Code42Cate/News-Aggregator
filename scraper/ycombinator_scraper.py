@@ -8,18 +8,19 @@ class YCombinatorScraper(SiteScraper):
     def scrape(self):
 
         result_list = []
-        result = requests.get(
-            "https://hacker-news.firebaseio.com/v0/beststories.json").json()
-        itemURL = "https://hacker-news.firebaseio.com/v0/item/{}.json"
-
-        loop = asyncio.get_event_loop()
-        tasks = []
-        for id in result:
-            task = asyncio.ensure_future(
-                self.__async_scrape(itemURL.format(id), result_list))
-            tasks.append(task)
-        loop.run_until_complete(asyncio.wait(tasks))
-
+        try:
+            result = requests.get(
+                "https://hacker-news.firebaseio.com/v0/beststories.json").json()
+            itemURL = "https://hacker-news.firebaseio.com/v0/item/{}.json"
+            loop = asyncio.get_event_loop()
+            tasks = []
+            for id in result:
+                task = asyncio.ensure_future(
+                    self.__async_scrape(itemURL.format(id), result_list))
+                tasks.append(task)
+            loop.run_until_complete(asyncio.wait(tasks))
+        except Exception as e:
+            print(str(e))
         self.__update_articles(result_list)
         return self
 

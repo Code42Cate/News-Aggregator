@@ -11,12 +11,15 @@ class RedditScraper(SiteScraper):
                           "https://www.reddit.com/r/compsci", "https://www.reddit.com/r/netsec", "https://www.reddit.com/r/webdev"]
         result = []
         tasks = []
-        loop = asyncio.get_event_loop()
-        for subreddit in subreddit_list:
-            url = subreddit + "/top.json"
-            task = asyncio.ensure_future(self.__async_scrape(url, result))
-            tasks.append(task)
-        loop.run_until_complete(asyncio.wait(tasks))
+        try:
+            loop = asyncio.get_event_loop()
+            for subreddit in subreddit_list:
+                url = subreddit + "/top.json"
+                task = asyncio.ensure_future(self.__async_scrape(url, result))
+                tasks.append(task)
+            loop.run_until_complete(asyncio.wait(tasks))
+        except Exception as e:
+            print(str(e))
         self.__update_articles(result)
         return self
 

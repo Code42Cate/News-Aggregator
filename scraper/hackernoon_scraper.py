@@ -11,13 +11,16 @@ class HackerNoonScraper(SiteScraper):
                            "https://hackernoon.com/tagged/artificial-intelligence", "https://hackernoon.com/tagged/futurism", "https://hackernoon.com/tagged/startups"]
         result = []
         tasks = []
-        loop = asyncio.get_event_loop()
-        for hackernoon_topic_url in hackernoon_urls:
-            task = asyncio.ensure_future(
-                self.__async_scrape(hackernoon_topic_url, result))
-            tasks.append(task)
-        loop.run_until_complete(asyncio.wait(tasks))
-        self.__update_articles(result)
+        try:
+            loop = asyncio.get_event_loop()
+            for hackernoon_topic_url in hackernoon_urls:
+                task = asyncio.ensure_future(
+                    self.__async_scrape(hackernoon_topic_url, result))
+                tasks.append(task)
+            loop.run_until_complete(asyncio.wait(tasks))
+            self.__update_articles(result)
+        except Exception as e:
+            print(str(e))
         return self
 
     async def __async_scrape(self, url, result_list):
