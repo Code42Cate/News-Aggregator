@@ -63,8 +63,8 @@ def remove_duplicates(articles):
     without_duplicates = []
 
     for url, title in articles:
-        if not title in visited:
-            visited.add(title)
+        if not url in visited:
+            visited.add(url)
             without_duplicates.append((url, title))
     return without_duplicates
 
