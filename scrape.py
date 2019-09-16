@@ -11,11 +11,14 @@ def aggregate():
 
     for url, title in articles:
         print('"{}","{}"'.format(title.replace("\n", "").replace('"', "'"), url))
+    articles = utils.add_timestamps(articles)
     articles = utils.remove_duplicates(articles)
-    #articles = utils.filter_by_keywords(articles, ["google", "security", "startup"])
+    filtered_articles = utils.filter_by_keywords(
+        articles, ["google", "security", "startup"])
     utils.articles_to_html(articles)
-    # utils.articles_to_vocabulary(articles)
+    utils.articles_to_vocabulary(articles)
     utils.articles_to_csv(articles)
+
     end = time.time()
     print("Scraping took: {} seconds".format(end - start))
 
