@@ -21,5 +21,3 @@ class TechRadarScraper(SiteScraper):
     def get_articles(self):
         return super().get_articles()
 
-
-print(TechRadarScraper().scrape().get_articles())
