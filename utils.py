@@ -69,18 +69,20 @@ def remove_duplicates(articles):
             without_duplicates.append((url, title, timestamp))
     return without_duplicates
 
-
+""""Takes all the articles and a list of keywords, creates a list of keywords found for each headline and then returns the original tuple + the found keywords in a new tuple"""
 def filter_by_keywords(articles, keywords):
-    # I am sure there is a more pythonic way for this
+    # I am sure there is a more pythonic way for this:D
     relevant_articles = []
     r = Rake()
     for url, title, timestamp in articles:
         r.extract_keywords_from_text(title)
         title_keywords = r.get_ranked_phrases()
+        found_keywords = []
         for keyword in keywords:
             if keyword.casefold() in map(str.casefold, title_keywords):
-                relevant_articles.append((url, title))
-                break
+                found_keywords.append(keyword)
+        if len(found_keywords) > 0:
+            relevant_articles.append(((url, title, timestamp), found_keywords))
     return relevant_articles
 
 

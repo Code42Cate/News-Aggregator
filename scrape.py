@@ -6,6 +6,7 @@ import time
 def aggregate():
     start = time.time()
     articles = []
+
     for Scraper in SiteScraper.__subclasses__():
         articles.extend(Scraper().scrape().get_articles())
 
@@ -14,7 +15,8 @@ def aggregate():
     articles = utils.add_timestamps(articles)
     articles = utils.remove_duplicates(articles)
     filtered_articles = utils.filter_by_keywords(
-        articles, ["google", "security", "startup"])
+        articles, ["google", "security", "startup", "programming"])
+    print(filtered_articles)
     utils.articles_to_html(articles)
     utils.articles_to_vocabulary(articles)
     utils.articles_to_csv(articles)
