@@ -11,6 +11,3 @@ class SiteScraper():
 
     def get_articles(self):
         return self.articles
-
-    def __close_session(self):
-        pass
