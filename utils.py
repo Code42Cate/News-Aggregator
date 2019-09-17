@@ -2,6 +2,7 @@
 from jinja2 import Template
 import csv
 import time
+from rake_nltk import Rake
 
 
 def articles_to_csv(articles_tuple):
@@ -33,26 +34,18 @@ def articles_to_html(articles_tuple):
     Template(template_string).stream(articles=articles).dump("newsletter.html")
 
 
-def get_stopwords():
-    with open("stopwords.txt", "r") as stopwords_file:
-        return stopwords_file.read().split("\n")
-
-# This function should do some more clean up. After the first iteration I found words like:
-# "if it, letâs
-
-
 def articles_to_vocabulary(articles_tuple):
     vocabulary = []
-    stopwords = get_stopwords()
     with open("vocabulary.txt", "r") as vocabulary_file:
         vocabulary = vocabulary_file.read().split('\n')
-
+    r = Rake()
     for url, title, timestamp in articles_tuple:
-        words = title.split(" ")
+        r.extract_keywords_from_text(title)
+        words = r.get_ranked_phrases()
         for word in words:
             word = word.lower()
-            if word not in vocabulary and word not in stopwords:
-                vocabulary.append(word.replace("\n", ""))
+            if word not in vocabulary:
+                vocabulary.append(word)
     with open("vocabulary.txt", "w") as vocabulary_file:
         for word in vocabulary:
             vocabulary_file.write("{}\n".format(word))
@@ -80,9 +73,18 @@ def remove_duplicates(articles):
 def filter_by_keywords(articles, keywords):
     # I am sure there is a more pythonic way for this
     relevant_articles = []
+    r = Rake()
     for url, title, timestamp in articles:
+        r.extract_keywords_from_text(title)
+        title_keywords = r.get_ranked_phrases()
         for keyword in keywords:
-            if keyword.lower() in title.lower():
+            if keyword.casefold() in map(str.casefold, title_keywords):
                 relevant_articles.append((url, title))
                 break
     return relevant_articles
+
+
+def extract_keywords(headline):
+    r = Rake()
+    r.extract_keywords_from_text(headline)
+    print(r.get_ranked_phrases())
