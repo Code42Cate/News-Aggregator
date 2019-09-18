@@ -11,10 +11,10 @@ class TestUtils(unittest.TestCase):
         pass
 
     def testRemoveDuplicates(self):
-        duplicates = [("url2", "title", 123), ("url1", "title", 123),
-                      ("url", "title", 123), ("url", "title", 123)]
-        without_duplicates = [("url2", "title", 123),
-                              ("url1", "title", 123), ("url", "title", 123)]
+        duplicates = [("url2", "title"), ("url1", "title"),
+                      ("url", "title"), ("url", "title")]
+        without_duplicates = [("url2", "title"),
+                              ("url1", "title"), ("url", "title")]
         result = utils.remove_duplicates(duplicates)
         self.assertEqual(without_duplicates, result)
 
