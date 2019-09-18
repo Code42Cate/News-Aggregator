@@ -41,12 +41,20 @@ All the scrapers are in the `scraper/` directory.
 
 If you want to add another scraper, all you need to do is make a class which inherits from SiteScraper and implement the scrape() method. The scraper will be dynamically used by scrape.py.
 
-If you need inspiration, take a look at the existing scrapers. Some use RSS Feeds [wired_scraper.py](scraper/wired_scraper.py), some json ([reddit_scraper.py](scraper/reddit_scraper.py)) and the others beautifulsoup.
+If you need inspiration, take a look at the existing scrapers. Some use RSS Feeds [wired_scraper.py](scraper/wired_scraper.py), some json [reddit_scraper.py](scraper/reddit_scraper.py) and the others beautifulsoup.
 AND please, if you do more than 1 request, make it asynchronously
 Before you push, make sure they work with the provided unit tests!:)
 
 ## Testing
 
+Feel free to add more tests:D
+
 This project is using pyunit for unit tests. Go into the root directory of this project and run: 
 
 `python3 -m unittest discover`
+
+## Acknowledgments
+Thank you:
+    
+    Django Team for the beautiful domain regex
+    SimonJ && Dirtykingballa for the mental help:D
