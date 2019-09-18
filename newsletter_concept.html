@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Newsletter</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        html {
+            min-height: 100%;
+        }
+
+        body {
+            background-color: #454d55;
+            height: 100%;
+        }
+
+        .ai {
+            background-color: chartreuse;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="labelselect">
+        <a href="#" class="badge badge-primary all">All</a>
+        <a href="#" class="badge badge-secondary ai">AI</a>
+        <a href="#" class="badge badge-success softwaredevelopment">Software Development</a>
+        <a href="#" class="badge badge-danger careers">Careers</a>
+        <a href="#" class="badge badge-warning business">Business</a>
+        <a href="#" class="badge badge-info future">Future</a>
+        <a href="#" class="badge badge-light faang">FAANG</a>
+        <a href="#" class="badge badge-dark ecommerce">E-Commerce</a>
+    </div>
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Article</th>
+                <th scope="col">Labels</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>1</td>
+                <td><a href="https://hackernoon.com/the-need-for-reflective-computing-n21he23bh">
+                        The Future of Committing Reflections to Your Machine
+                    </a></td>
+                <td>
+                    <a href="#" class="badge badge-info future">Future</a>
+                    <a href="#" class="badge badge-info computerscience">Computer Science</a>
+                    <a href="#" class="badge badge-primary" name="addlabel" data-toggle="modal"
+                        data-target="#labelmodal">Add Label</a>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><a href="https://hackernoon.com/ai-in-five-fifty-and-five-hundred-years-part-one-e630058b547f">
+                        AI in Five, Fifty and Five Hundred Years — Part One
+                    </a></td>
+                <td> <a href="#" class="badge badge-secondary ai">AI</a>
+                    <a href="#" class="badge badge-primary" name="addlabel" data-toggle="modal"
+                        data-target="#labelmodal">Add Label</a>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td><a
+                        href="https://hackernoon.com/what-google-search-data-can-tell-us-about-the-future-of-careers-tkz731tc">
+                        What Google Search Data Can Tell Us About The Future Of Careers
+                    </a></td>
+                <td> <a href="#" class="badge badge-danger careers">Careers</a>
+                    <a href="#" class="badge badge-info future">Future</a>
+                    <a href="#" class="badge badge-light faang">FAANG</a>
+                    <a href="#" class="badge badge-primary" name="addlabel" data-toggle="modal"
+                        data-target="#labelmodal">Add Label</a>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>4</td>
+                <td><a href="https://hackernoon.com/wordpress-lessons-applicable-for-vr-sz1k541kk">
+                        WordPress Lessons: Applicable for VR?
+                    </a></td>
+                <td>
+                    <a href="#" class="badge badge-dark ecommerce">E-Commerce</a>
+                    <a href="#" class="badge badge-success softwaredevelopment">Software Development</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>5</td>
+                <td><a href="https://hackernoon.com/big-tech-the-light-side-7o8h3sut">
+                        Is Big Tech Too Big?
+                    </a></td>
+                <td>
+                    <a href="#" class="badge badge-warning business">Business</a>
+
+                    <a href="#" class="badge badge-light faang">FAANG</a>
+
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>6</td>
+                <td><a href="https://hackernoon.com/major-challenges-of-3d-printing-for-corporations-rrt03ylk">
+                        Major Challenges of 3D Printing for Corporations
+                    </a></td>
+                <td>major need plastic companies reduce printing parts sales 3d products printed challenges corporations
+                </td>
+            </tr>
+
+            <tr>
+                <td>7</td>
+                <td><a href="https://hackernoon.com/thinking-humans-as-a-computer-program-64qz30ae">
+                        Thinking of Humans as a Computer Program
+                    </a></td>
+                <td>using program trycatch computer humans function functions thinking fear device known</td>
+            </tr>
+
+            <tr>
+                <td>8</td>
+                <td><a href="https://hackernoon.com/how-likely-is-your-job-to-be-automated-1e13x34oy">
+                        How Likely Is Your Job to be Automated?
+                    </a></td>
+
+                <td>
+                    <a href="#" class="badge badge-success softwaredevelopment">Software Development</a>
+                    <a href="#" class="badge badge-warning business">Business</a>
+                    <a href="#" class="badge badge-info future">Future</a>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>9</td>
+                <td><a href="https://hackernoon.com/another-thought-about-the-future-ne18e3tai">
+                        Another Thought About the Future
+                    </a></td>
+                <td> <a href="#" class="badge badge-info future">Future</a>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="labelmodal" tabindex="-1" role="dialog" aria-labelledby="labelmodallabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Label</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="modal-labels-set"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script>
+        document.getElementsByName('addlabel').forEach((elem) => {
+            elem.addEventListener('click', (event) => {
+                const div = document.getElementById('modal-labels-set');
+                const title = event.target.parentElement.parentElement.children[1].children[0].innerText;
+                div.innerHTML = `<p>Title: ${title}</p><p>Existing labels: </p>`;
+                const childs = event.target.parentElement.children;
+                for (let label of childs) {
+                    if (label.name !== 'addlabel') div.innerHTML += `${label.outerHTML} `;
+                };
+            });
+        })
+    </script>
+</body>
+
+</html>
