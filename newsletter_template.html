@@ -15,7 +15,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Article</th>
                 <th scope="col">Score</th>
-                <th scope="col">Categories</th>
+                <th scope="col">Keywords</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +24,7 @@
                 <td>{{loop.index}}</td>
                 <td><a href="{{article.url}}">{{article.title}}</a></td>
                 <td>1.0</td>
-                <td>Tech</td>
+                <td>{{article.keywords}}</td>
             </tr>
             {% endfor %}
         </tbody>
