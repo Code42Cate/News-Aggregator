@@ -29,6 +29,8 @@ The results of getting into a bubble where, that I only got the most boring main
 
 ## TODO:
 
+- Figure out how we can prevent timeouts (and handle other errors) from all the sites
+    (Might wanna use proxies?)
 - Figure out how the fuck asyncio works so I can make the main scraping loop in async:D
 - Make the newsletter template a little bit more beautiful
 - Figure out how to close failing connections
