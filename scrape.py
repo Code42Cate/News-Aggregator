@@ -14,15 +14,10 @@ def aggregate():
     for Scraper in SiteScraper.__subclasses__():
         articles.extend(Scraper().scrape().get_articles())
     end = time.time()
+    article_objects = utils.article_tuples_to_objects(articles) # Convert to article objects
     print("Scraping took: {} seconds".format(end - start))
-    start = time.time()
     # articles = articles[5:15] # Smaller dataset for testing purposes
-    # Init all Article Objects
-    for url, title in articles:
-        article_objects.append(Article(url, title))
-    end = time.time()
-    print("Initializing objects took: {} seconds".format(end - start))
-
+    
     start = time.time()
     article_objects = utils.remove_duplicate_articles(article_objects)
     end = time.time()
@@ -32,7 +27,7 @@ def aggregate():
     start = time.time()
     counter = 0
     for article in article_objects:
-        article.process()
+        article.process()   # Process is downloading, parsing and classifying each article. Currently everything synchronous so slow af
         counter += 1
         print("{}/{}".format(counter, len(article_objects)))
     end = time.time()
@@ -42,8 +37,6 @@ def aggregate():
     utils.article_objects_to_json(article_objects)
     end = time.time()
     print("Converting to JSON took: {} seconds".format(end - start))
-    # utils.articles_to_vocabulary(articles)
-    # utils.articles_to_csv(articles)
 
 
 if __name__ == "__main__":

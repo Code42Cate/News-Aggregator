@@ -32,3 +32,10 @@ def remove_duplicate_articles(articles):
             visited.add(article.url)
             without_duplicates.append(article)
     return without_duplicates
+
+
+def article_tuples_to_objects(articles):
+    article_objects = []
+    for url, title in articles:
+        article_objects.append(Article(url, title))
+    return article_objects
