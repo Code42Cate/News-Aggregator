@@ -16,6 +16,10 @@
             height: 100%;
         }
 
+        .badge {
+            margin-left: 3px;
+        }
+
         .ai {
             background-color: chartreuse;
             color: black;
@@ -24,15 +28,21 @@
 </head>
 
 <body>
-    <div id="labelselect">
-        <a href="#" class="badge badge-primary all">All</a>
-        <a href="#" class="badge badge-secondary ai">AI</a>
-        <a href="#" class="badge badge-success softwaredevelopment">Software Development</a>
-        <a href="#" class="badge badge-danger careers">Careers</a>
-        <a href="#" class="badge badge-warning business">Business</a>
-        <a href="#" class="badge badge-info future">Future</a>
-        <a href="#" class="badge badge-light faang">FAANG</a>
-        <a href="#" class="badge badge-dark ecommerce">E-Commerce</a>
+    <div>
+        <div id="labelselect" style="width: 50%;">
+            <span style="color: white; font-weight: 600;">Active:</span>
+            <a href="#" class="badge badge-primary all">All</a>
+            <a href="#" class="badge badge-secondary ai">AI</a>
+            <a href="#" class="badge badge-success softwaredevelopment">Software Development</a>
+            <a href="#" class="badge badge-danger careers">Careers</a>
+            <a href="#" class="badge badge-warning business">Business</a>
+            <a href="#" class="badge badge-info future">Future</a>
+            <a href="#" class="badge badge-light faang">FAANG</a>
+            <a href="#" class="badge badge-dark ecommerce">E-Commerce</a>
+        </div>
+        <div id="labeldisable" style="width: 50%;">
+            <span style="color: white; font-weight: 600;">Inactive:</span>
+        </div>
     </div>
     <table class="table table-hover table-dark">
         <thead>
@@ -42,7 +52,7 @@
                 <th scope="col">Labels</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="articletable">
 
             <tr>
                 <td>1</td>
@@ -106,23 +116,6 @@
 
 
                 </td>
-            </tr>
-
-            <tr>
-                <td>6</td>
-                <td><a href="https://hackernoon.com/major-challenges-of-3d-printing-for-corporations-rrt03ylk">
-                        Major Challenges of 3D Printing for Corporations
-                    </a></td>
-                <td>major need plastic companies reduce printing parts sales 3d products printed challenges corporations
-                </td>
-            </tr>
-
-            <tr>
-                <td>7</td>
-                <td><a href="https://hackernoon.com/thinking-humans-as-a-computer-program-64qz30ae">
-                        Thinking of Humans as a Computer Program
-                    </a></td>
-                <td>using program trycatch computer humans function functions thinking fear device known</td>
             </tr>
 
             <tr>
@@ -193,6 +186,53 @@
                 };
             });
         })
+
+        const filterArticles = () => {
+            let selectedLabelDiv = document.getElementById('labelselect');
+            selectedLabels = [];
+            selectedLabelDiv.childNodes.forEach((badge) => {
+        
+                if (badge.classList !== undefined && badge.classList.length !== 0) {
+                    selectedLabels.push(badge.innerText)
+                }
+            });
+            
+            const articleTable = document.getElementById('articletable');
+            const rows = articleTable.rows;
+            for (let index = 0; index < rows.length; index += 1) {
+                let rowArticles = ['All'];
+                rows[index].cells[2].childNodes.forEach((badge) => {
+                    if (badge.classList !== undefined && badge.innerText !== 'Add Label') rowArticles.push(badge.innerText);
+                })
+                console.log('Have: ' + rowArticles);
+                console.log('Want: ' + selectedLabels);
+                const intersection = selectedLabels.filter(x => rowArticles.includes(x));
+                if (intersection.length === 0) {
+                    articleTable.deleteRow(index);
+                    console.log(index);
+                }
+            }
+
+        }
+        filterArticles();
+
+        const array = document.getElementsByClassName('badge');
+        for (let index = 0; index < array.length; index += 1) {
+            array[index].addEventListener('click', (event) => {
+                if (event.target.parentElement.id === 'labelselect') {
+                    event.target.parentNode.removeChild(event.target);
+                    const disabledDiv = document.getElementById('labeldisable');
+                    disabledDiv.appendChild(event.target);
+                } else {
+                    event.target.parentNode.removeChild(event.target);
+                    const enabledDiv = document.getElementById('labelselect');
+                    enabledDiv.appendChild(event.target);
+                }
+                filterArticles();
+            });
+        }
+
+
     </script>
 </body>
 
