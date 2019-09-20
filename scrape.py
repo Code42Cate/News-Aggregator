@@ -37,10 +37,7 @@ def aggregate():
         print("{}/{}".format(counter, len(article_objects)))
     end = time.time()
     print("Processing articles took: {} seconds".format(end - start))
-    start = time.time()
-    utils.articles_to_html(article_objects)
-    end = time.time()
-    print("Filling template took: {} seconds".format(end - start))
+
     start = time.time()
     utils.article_objects_to_json(article_objects)
     end = time.time()
