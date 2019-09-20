@@ -12,10 +12,12 @@ class Article():
     title = ""
     __article = None
 
-    def __init__(self, url, title):
+    def __init__(self, url, title, *args, **kwargs):
         self.__article = newspaper.Article(url)
         self.url = url
         self.title = title
+        self.content = kwargs.get('content', None)
+        self.keywords = kwargs.get('keywords', None)
 
     def process(self):
         print("Processing {}".format(self.url))
@@ -35,6 +37,8 @@ class Article():
             self.process()
         return self.keywords
 
+    def __str__(self):
+        return "Title: {}\nURL: {}\nContent: {}\nKeywords: {}".format(self.title, self.url, self.content, self.keywords)
     """
     returns an object this structure: 
     {
