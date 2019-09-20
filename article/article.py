@@ -1,6 +1,6 @@
 import newspaper
 import time
-
+from newspaper import ArticleException
 
 class Article():
     page = ""
@@ -17,16 +17,14 @@ class Article():
 
     def process(self):
         print("Processing {}".format(self.url))
-        self.__article.download()
-
-        if self.__article.html is None:  # We could not download the page
-            time.sleep(7)
-            self.process()
-            return
-
-        self.__article.parse()
-        self.__article.nlp()
-
+        try:
+            self.__article.download()
+        
+            self.__article.parse()
+            self.__article.nlp()
+        except:
+            print("Failed to do things with {}".format(self.url))
+            pass
         self.content = self.__article.text
         self.keywords = self.__article.keywords
 
