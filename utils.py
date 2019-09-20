@@ -1,5 +1,14 @@
 # encoding:utf-8
 from jinja2 import Template
+import json
+
+
+def article_objects_to_json(article_objects):
+    article_jsons = []
+    for article_object in article_objects:
+        article_jsons.append(article_object.to_beautiful_object())
+    with open("dataset.json", "w") as f:
+        json.dump({"articles": article_jsons}, f)
 
 
 def articles_to_html(articles):
