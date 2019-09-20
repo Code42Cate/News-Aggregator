@@ -1,6 +1,15 @@
 # encoding:utf-8
 from jinja2 import Template
 import json
+from article import Article
+
+
+def json_to_articles(filename):
+    article_objects = []
+    for json_article in json.loads(open(filename, "r").read())["articles"]:
+        article_objects.append(Article(json_article["url"], json_article["title"],
+                                       content=json_article["content"], keywords=json_article["keywords"]))
+    return article_objects
 
 
 def article_objects_to_json(article_objects):
