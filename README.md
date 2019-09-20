@@ -35,6 +35,10 @@ The results of getting into a bubble where, that I only got the most boring main
 - Make the newsletter template a little bit more beautiful
 - Figure out how to close failing connections
 - Figure out how to handle exceptions in the scrapers, it would be good if people who implement scrapers do not need to do worry about that
+- Write an API which the newsletter frontend can use
+- Add database
+- Add filtering options for frontend
+
 
 ## You want to add your own scrapers for your favourite site?
 All the scrapers are in the `scraper/` directory.
