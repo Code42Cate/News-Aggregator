@@ -39,3 +39,15 @@ def article_tuples_to_objects(articles):
     for url, title in articles:
         article_objects.append(Article(url, title))
     return article_objects
+
+
+def remove_faulty_objects(articles, faulty_articles):
+    faulty_urls = set()
+    for faulty in faulty_articles:
+        faulty_urls.add(faulty.url)
+    without_faulty = []
+    for article in articles:
+        if not article.url in faulty_urls:
+            without_faulty.append(article)
+
+    return without_faulty

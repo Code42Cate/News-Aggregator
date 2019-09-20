@@ -16,7 +16,7 @@ def aggregate():
     end = time.time()
     article_objects = utils.article_tuples_to_objects(articles) # Convert to article objects
     print("Scraping took: {} seconds".format(end - start))
-    # articles = articles[5:15] # Smaller dataset for testing purposes
+    article_objects = article_objects[5:15] # Smaller dataset for testing purposes
     
     start = time.time()
     article_objects = utils.remove_duplicate_articles(article_objects)
@@ -26,12 +26,16 @@ def aggregate():
 
     start = time.time()
     counter = 0
+    failed_articles = [] # We want to remove and more importantly log them for later
     for article in article_objects:
-        article.process()   # Process is downloading, parsing and classifying each article. Currently everything synchronous so slow af
+        if not article.process():   # Process is downloading, parsing and classifying each article. Currently everything synchronous so slow af
+            failed_articles.append(article)
         counter += 1
         print("{}/{}".format(counter, len(article_objects)))
     end = time.time()
     print("Processing articles took: {} seconds".format(end - start))
+
+    article_objects = utils.remove_faulty_objects(article_objects, failed_articles)
 
     start = time.time()
     utils.article_objects_to_json(article_objects)

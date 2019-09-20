@@ -28,9 +28,11 @@ class Article():
             self.__article.nlp()
         except:
             print("Failed to do things with {}".format(self.url))
-            pass
+            return False
+
         self.content = self.__article.text
         self.keywords = self.__article.keywords
+        return True
 
     def get_keywords(self):
         if len(self.keywords) is 0:
