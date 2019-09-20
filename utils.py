@@ -34,12 +34,16 @@ def articles_to_html(articles):
         articles=dict_articles).dump("newsletter.html")
 
 
-def remove_duplicates(articles):
+"""
+For arrays of article objects, removing articles with same URL property
+"""
+
+
+def remove_duplicate_articles(articles):
     visited = set()
     without_duplicates = []
-
-    for url, title in articles:
-        if not url in visited:
-            visited.add(url)
-            without_duplicates.append((url, title))
+    for article in articles:
+        if not article.url in visited:
+            visited.add(article.url)
+            without_duplicates.append(article)
     return without_duplicates
