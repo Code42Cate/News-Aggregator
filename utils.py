@@ -31,6 +31,7 @@ def remove_duplicate_articles(articles):
         if not article.url in visited:
             visited.add(article.url)
             without_duplicates.append(article)
+            
     return without_duplicates
 
 
@@ -51,3 +52,15 @@ def remove_faulty_objects(articles, faulty_articles):
             without_faulty.append(article)
 
     return without_faulty
+
+
+def remove_database_articles(articles, database_articles):
+    database_set = set()
+    result = []
+    for article in database_articles:
+        database_set.add(article.url)
+    for article in articles:
+        if not article.url in database_set:
+            result.append(article)
+
+    return result
