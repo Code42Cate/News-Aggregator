@@ -16,8 +16,8 @@ class Article():
         self.__article = newspaper.Article(url)
         self.url = url
         self.title = title
-        self.content = kwargs.get('content', None)
-        self.keywords = kwargs.get('keywords', None)
+        self.content = kwargs.get('content', "")
+        self.keywords = kwargs.get('keywords', "")
 
     def process(self):
         print("Processing {}".format(self.url))
