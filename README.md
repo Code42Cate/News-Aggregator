@@ -45,7 +45,7 @@ The results of getting into a bubble where, that I only got the most boring main
     - [Flask](https://github.com/pallets/flask) && [Connexion](https://github.com/zalando/connexion) as Webserver / API
     - [Newspaper](https://github.com/codelucas/newspaper) for the article scraping
 - Database: [mongoDB](https://www.mongodb.com/)
-- Frontend: vanillaJS and [Bootstrap 4.0](https://getbootstrap.com/)
+- Frontend: JavaScript and [Bootstrap 4.0](https://getbootstrap.com/)
 
 ## You want to add your own scrapers for your favourite site?
 All the scrapers are in the `scraper/` directory.
