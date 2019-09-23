@@ -9,8 +9,14 @@ def get_articles():
         del article['content']
         del article['_id']
         categories = []
+        keywords = []
         for keyword in article["keywords"]:
-            categories.extend(database.get_categories(keyword))
+            temp = database.get_categories(keyword)
+            if len(temp) is 0:
+                keywords.append(keyword)
+            else:  
+                categories.extend(temp)
+        article["keywords"] = keywords
         article["categories"] = list(dict.fromkeys(categories))
     return articles
 
