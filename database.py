@@ -29,3 +29,7 @@ def get_articles():
         article_objects.append(Article(
             article["url"], article["title"], content=article["content"], keywords=article["keywords"]))
     return article_objects
+
+
+def get_articles_json():
+    return list(articles_collection.find({}))

@@ -22,7 +22,6 @@ def aggregate():
         articles))  # Convert to article objects
     print("Scraping took: {} seconds".format(end - start))
     # article_objects = article_objects[0:10] # Smaller dataset for testing purposes
-    print(len(article_objects))
     start = time.time()
     article_objects = utils.remove_duplicate_articles(article_objects)
     article_objects = utils.remove_database_articles(

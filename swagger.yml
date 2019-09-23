@@ -1,0 +1,34 @@
+swagger: "2.0"
+info:
+  description: API for https://github.com/Code42Cate/google-news-sucks
+  version: "1.0.0"
+  title: Google News Sucks API
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+
+basePath: "/api/v1"
+
+# Paths supported by the server application
+paths:
+  /articles:
+    get:
+      operationId: "api.get_articles"
+      tags:
+        - "Articles"
+      summary: "The articles data structure supported by the server application, without content of the articles"
+      description: "Read complete list of articles"
+      responses:
+        200:
+          description: "Successful read articles list operation"
+          schema:
+            type: "array"
+            items:
+              properties:
+                url:
+                  type: "string"
+                title:
+                  type: "string"
+                keywords:
+                  type: "string"
