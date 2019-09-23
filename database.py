@@ -3,6 +3,7 @@ from article import Article
 client = MongoClient()
 db = client.news_database
 articles_collection = db.articles
+keywords_collection = db.keywords
 
 
 def save_articles(articles):
@@ -20,6 +21,18 @@ def save_articles(articles):
 
     articles_collection.insert_many(insert_articles)
     print("Inserted {} articles".format(len(articles)))
+
+
+def update_keyword(keyword, category):
+    keywords_collection.update_one(
+        {"keyword": keyword}, {"$addToSet": {"categories": category}}, upsert=True)
+
+
+def get_categories(keyword):
+    result = keywords_collection.find_one({"keyword": keyword})
+    if result is not None:
+        return result["categories"]
+    return []
 
 
 def get_articles():

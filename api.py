@@ -8,7 +8,15 @@ def get_articles():
     for article in articles:
         del article['content']
         del article['_id']
+        categories = []
+        for keyword in article["keywords"]:
+            categories.extend(database.get_categories(keyword))
+        article["categories"] = list(dict.fromkeys(categories))
     return articles
+
+
+def update_keyword(keyword, category):
+    database.update_keyword(keyword, category["category"])
 
 
 # application instance

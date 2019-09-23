@@ -10,7 +10,6 @@ produces:
 
 basePath: "/api/v1"
 
-# Paths supported by the server application
 paths:
   /articles:
     get:
@@ -31,4 +30,35 @@ paths:
                 title:
                   type: "string"
                 keywords:
-                  type: "string"
+                  type: array
+                  items:
+                    type: string
+                categories:
+                  type: array
+                  items:
+                    type: string
+  /categories/{keyword}:
+    patch:
+      operationId: "api.update_keyword"
+      tags:
+        - "Keywords"
+        - "Categories"
+      summary: "Adds the category to the categories set from the given keyword"
+      parameters:
+      - name: keyword
+        in: path
+        description: Keyword that should get updated
+        type: string
+        required: True
+      - name: category
+        in: body
+        required: True
+        schema:
+          type: object
+          properties:
+            category:
+              type: string
+              description: Category to be added
+      responses:
+        200:
+          description: "Added category"
