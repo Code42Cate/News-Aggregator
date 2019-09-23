@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Newsletter</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    html {
+      min-height: 100%;
+    }
+
+    body {
+      background-color: #454d55;
+      height: 100%;
+    }
+
+    .ai {
+      background-color: chartreuse;
+      color: black;
+    }
+
+    .all {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .softwaredevelopment {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .careers {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .business {
+      background-color: #ffc107;
+      color: black;
+    }
+
+    .future {
+      background-color: #17a2b8;
+      color: black;
+    }
+
+    .faang {
+      background-color: #f8f9fa;
+      color: black;
+    }
+
+    .ecommerce {
+      background-color: #343a40;
+      color: white;
+    }
+
+    .standard {
+      background-color: chocolate;
+      color: white;
+    }
+
+    div.inline {
+      float: left;
+    }
+
+    div.keyword {
+      margin-left: 5px;
+      cursor: pointer;
+      -webkit-user-select: none;
+      /* webkit (safari, chrome) browsers */
+      -moz-user-select: none;
+      /* mozilla browsers */
+      -khtml-user-select: none;
+      /* webkit (konqueror) browsers */
+      -ms-user-select: none;
+      /* IE10+ */
+    }
+
+    .badge {
+      cursor: pointer;
+      margin-left: 1.5px;
+      margin-right: 1.5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <div id="labelselect" class="inline">
+      <span class="badge all" id="all-label" draggable="true" ondragstart="drag(event)">All</span>
+      <span class="badge ai" id="ai-label" draggable="true" ondragstart="drag(event)">AI</span>
+      <span class="badge softwaredevelopment" id="softwaredevelopment-label" draggable="true"
+        ondragstart="drag(event)">Software Development</span>
+      <span class="badge careers" id="careers-label" draggable="true" ondragstart="drag(event)">Careers</span>
+      <span class="badge business" id="business-label" draggable="true" ondragstart="drag(event)">Business</span>
+      <span class="badge future" id="future-label" draggable="true" ondragstart="drag(event)">Future</span>
+      <span class="badge faang" id="faang-label" draggable="true" ondragstart="drag(event)">FAANG</span>
+      <span class="badge ecommerce" id="ecommerce-label" draggable="true" ondragstart="drag(event)">E-Commerce</span>
+    </div>
+    <div class="inline" style="margin-left: 3px;"> <span class="badge badge-primary" name="addlabel" data-toggle="modal"
+        data-target="#labelmodal">Add
+        Label</span></div>
+  </div>
+  <table class="table table-hover table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Article</th>
+        <th scope="col">Labels</th>
+      </tr>
+    </thead>
+    <tbody id="articletable">
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+  <div class="modal fade" id="labelmodal" tabindex="-1" role="dialog" aria-labelledby="labelmodallabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New Label</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="modal-labels-set"></div>
+          <br>
+          <div class="form-group">
+            <input type="label" class="form-control" id="newLabelInput" aria-describedby="labelHelp"
+              placeholder="Enter label name">
+            <small id="labelHelp" class="form-text text-muted">Everybody will be able to see and use this label.</small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelButton">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="addNewLabel();">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script>
+
+
+    function addNewLabel() {
+      // validate + send to backend aswell
+      const labelName = document.getElementById('newLabelInput').value;
+      const labelclass = labelName.replace(" ", "").toLowerCase();
+      const div = document.getElementById('labelselect');
+      const html = `<span class="badge ${labelclass} standard" id="${labelclass}-label" draggable="true" ondragstart="drag(event)">${labelName}</span>`;
+      div.innerHTML += html;
+      document.getElementById('cancelButton').click();
+    }
+
+
+    // DRAG AND DROP CODE TAKEN FROM: https://stackoverflow.com/questions/13007582/html5-drag-and-copy
+    function allowDrop(ev) {
+      /* The default handling is to not allow dropping elements. */
+      /* Here we allow it by preventing the default behaviour. */
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      /* Here is specified what should be dragged. */
+      /* This data will be dropped at the place where the mouse button is released */
+      /* Here, we want to drag the element itself, so we set it's ID. */
+      ev.dataTransfer.setData('text/html', ev.target.id);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData('text/html');
+      /* If you use DOM manipulation functions, their default behaviour it not to 
+         copy but to alter and move elements. By appending a ".cloneNode(true)", 
+         you will not move the original element, but create a copy. */
+      var nodeCopy = document.getElementById(data).cloneNode(true);
+      nodeCopy.removeAttribute('id'); /* We cannot use the same ID */
+      nodeCopy.addEventListener('dblclick', remove);
+      ev.target.innerHTML = "";
+      ev.target.appendChild(nodeCopy);
+    }
+    function remove(ev) {
+      ev.target.remove()
+    }
+
+    (async () => {
+      const url = 'http://localhost:5000/api/v1/articles'
+      const fetchAsyncA = async () => {
+        const articles = await (await fetch(url)).json()
+        const table = document.getElementById('articletable');
+        let counter = articles.length;
+        articles.forEach((article) => {
+
+          const row = table.insertRow(0);
+          const index = row.insertCell(0).innerHTML = counter;
+          const title = row.insertCell(1).innerHTML = `<a href="${article.url}">${article.title}</a>`;
+          const keywords = row.insertCell(2);
+          let html = ""
+          article.keywords.forEach((keyword) => {
+            html += `<div class="inline keyword" ondrop="drop(event)" ondragover="allowDrop(event)" ondblclick="remove(event)">${keyword}</div>`;
+          });
+          keywords.innerHTML = html;
+          counter -= 1;
+        });
+      }
+      fetchAsyncA();
+    })();
+
+    document.getElementsByName('addlabel').forEach((elem) => {
+      elem.addEventListener('click', (event) => {
+        const div = document.getElementById('modal-labels-set');
+        div.innerHTML = `<p>Existing labels: </p>`;
+        const childs = event.target.parentElement.children;
+        for (let label of childs) {
+          div.innerHTML += `${label.outerHTML} `;
+        };
+      });
+    })
+
+
+  </script>
+</body>
+
+</html>
