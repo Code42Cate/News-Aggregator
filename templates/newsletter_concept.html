@@ -164,7 +164,11 @@
       document.getElementById('cancelButton').click();
     }
 
-
+    function updateKeyword(keyword, category) {
+      fetch(`http://localhost:5000/api/v1/categories/${keyword}`, { body: JSON.stringify({ "category": category }), method: "PATCH", headers: { 'Content-Type': 'application/json' } }).then((response) => {
+        console.log(response);
+      });
+    }
     // DRAG AND DROP CODE TAKEN FROM: https://stackoverflow.com/questions/13007582/html5-drag-and-copy
     function allowDrop(ev) {
       /* The default handling is to not allow dropping elements. */
@@ -188,12 +192,18 @@
       var nodeCopy = document.getElementById(data).cloneNode(true);
       nodeCopy.removeAttribute('id'); /* We cannot use the same ID */
       nodeCopy.addEventListener('dblclick', remove);
+      const keyword = ev.target.innerText;
+      const category = nodeCopy.innerText;
       ev.target.innerHTML = "";
       ev.target.appendChild(nodeCopy);
+      console.log(keyword)
+      console.log(category)
+      updateKeyword(keyword, category);
     }
     function remove(ev) {
       ev.target.remove()
     }
+    const firstLetterToUpperCase = string => string[0].toUpperCase() + string.substring(1);
 
     (async () => {
       const url = 'http://localhost:5000/api/v1/articles'
@@ -208,6 +218,9 @@
           const title = row.insertCell(1).innerHTML = `<a href="${article.url}">${article.title}</a>`;
           const keywords = row.insertCell(2);
           let html = ""
+          article.categories.forEach((category) => {
+            html += `<span class="badge standard">${firstLetterToUpperCase(category)}</span>`
+          });
           article.keywords.forEach((keyword) => {
             html += `<div class="inline keyword" ondrop="drop(event)" ondragover="allowDrop(event)" ondblclick="remove(event)">${keyword}</div>`;
           });
