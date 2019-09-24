@@ -43,6 +43,10 @@
       margin: 3px;
       font-weight: 900;
       font-size: 87%;
+      float: left;
+    }
+    a {
+      color: cornflowerblue;
     }
 
     #articletable {
@@ -229,7 +233,7 @@
         const labels = document.getElementById('labelselect');
         categories.forEach((category) => {
           const colour = colourCategories[category];
-          const html = `<span class="badge" style="background-color: ${palette.get(colour, '700')};color:${palette.getText(colour, '500', 'Secondary')};font-size:87%;" draggable="true" ondragstart="drag(event)">${firstLetterToUpperCase(category)}</span>`
+          const html = `<span class="badge" id="${category}" style="background-color: ${palette.get(colour, '700')}; color:${palette.getText(colour, '500', 'Secondary')}; font-size:87%;" draggable="true" ondragstart="drag(event)">${firstLetterToUpperCase(category)}</span>`
           labels.innerHTML += html;
         });
       }
