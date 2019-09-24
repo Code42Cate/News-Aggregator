@@ -247,7 +247,7 @@
       elem.addEventListener('click', (event) => {
         const div = document.getElementById('modal-labels-set');
         div.innerHTML = `<p>Existing labels: </p>`;
-        const childs = event.target.parentElement.children;
+        const childs = event.target.parentElement.parentElement.children[0].children;
         for (let label of childs) {
           div.innerHTML += `${label.outerHTML} `;
         };
