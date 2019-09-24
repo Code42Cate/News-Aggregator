@@ -36,7 +36,6 @@ The results of getting into a bubble where, that I only got the most boring main
 - Figure out how to close failing connections
 - Figure out how to handle exceptions in the scrapers, it would be good if people who implement scrapers do not need to do worry about that
 - Write an API which the newsletter frontend can use
-- Add database
 - Add filtering options for frontend
 
 ## Tech Stack
@@ -45,8 +44,7 @@ The results of getting into a bubble where, that I only got the most boring main
     - [Flask](https://github.com/pallets/flask) && [Connexion](https://github.com/zalando/connexion) as Webserver / API
     - [Newspaper](https://github.com/codelucas/newspaper) for the article scraping
 - Database: [mongoDB](https://www.mongodb.com/)
-- Frontend: JavaScript and [Bootstrap 4.0](https://getbootstrap.com/)
-
+- Frontend: JavaScript and [Bootstrap 4.0](https://getbootstrap.com/), also using the [google material colour palette](https://github.com/8lueberry/google-material-color/)
 ## You want to add your own scrapers for your favourite site?
 All the scrapers are in the `scraper/` directory.
 
