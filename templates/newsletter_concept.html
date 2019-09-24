@@ -16,48 +16,8 @@
       height: 100%;
     }
 
-    .ai {
-      background-color: chartreuse;
-      color: black;
-    }
-
     .all {
       background-color: #007bff;
-      color: white;
-    }
-
-    .softwaredevelopment {
-      background-color: #28a745;
-      color: white;
-    }
-
-    .careers {
-      background-color: #dc3545;
-      color: white;
-    }
-
-    .business {
-      background-color: #ffc107;
-      color: black;
-    }
-
-    .future {
-      background-color: #17a2b8;
-      color: black;
-    }
-
-    .faang {
-      background-color: #f8f9fa;
-      color: black;
-    }
-
-    .ecommerce {
-      background-color: #343a40;
-      color: white;
-    }
-
-    .standard {
-      background-color: chocolate;
       color: white;
     }
 
@@ -80,8 +40,9 @@
 
     .badge {
       cursor: pointer;
-      margin-left: 1.5px;
-      margin-right: 1.5px;
+      margin-left: 3px;
+      margin-right: 3px;
+      font-weight: 900;
     }
   </style>
 </head>
@@ -90,16 +51,8 @@
   <div>
     <div id="labelselect" class="inline">
       <span class="badge all" id="all-label" draggable="true" ondragstart="drag(event)">All</span>
-      <span class="badge ai" id="ai-label" draggable="true" ondragstart="drag(event)">AI</span>
-      <span class="badge softwaredevelopment" id="softwaredevelopment-label" draggable="true"
-        ondragstart="drag(event)">Software Development</span>
-      <span class="badge careers" id="careers-label" draggable="true" ondragstart="drag(event)">Careers</span>
-      <span class="badge business" id="business-label" draggable="true" ondragstart="drag(event)">Business</span>
-      <span class="badge future" id="future-label" draggable="true" ondragstart="drag(event)">Future</span>
-      <span class="badge faang" id="faang-label" draggable="true" ondragstart="drag(event)">FAANG</span>
-      <span class="badge ecommerce" id="ecommerce-label" draggable="true" ondragstart="drag(event)">E-Commerce</span>
     </div>
-    <div class="inline" style="margin-left: 3px;"> <span class="badge badge-primary" name="addlabel" data-toggle="modal"
+    <div class="inline" style="margin-left: 3px;"> <span class="badge badge-primary" id="addlabel" data-toggle="modal"
         data-target="#labelmodal">Add
         Label</span></div>
   </div>
@@ -151,11 +104,18 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='palette.min.js') }}"></script>
   <script>
-
-
+    function addLabelEventListener(event) {
+      const div = document.getElementById('modal-labels-set');
+      div.innerHTML = `<p>Existing labels: </p>`;
+      const childs = event.target.parentElement.parentElement.children[0].children;
+      for (let label of childs) {
+        div.innerHTML += `${label.outerHTML} `;
+      };
+    }
+    document.getElementById('addlabel').addEventListener('click', addLabelEventListener);
     function addNewLabel() {
-      // validate + send to backend aswell
       const labelName = document.getElementById('newLabelInput').value;
       const labelclass = labelName.replace(" ", "").toLowerCase();
       const div = document.getElementById('labelselect');
@@ -164,7 +124,6 @@
       document.getElementById('newLabelInput').value = '';
       document.getElementById('cancelButton').click();
     }
-
     function updateKeyword(keyword, category) {
       fetch(`http://localhost:5000/api/v1/categories/${keyword}`, { body: JSON.stringify({ "category": category }), method: "PATCH", headers: { 'Content-Type': 'application/json' } }).then((response) => {
         console.log(response);
@@ -209,12 +168,26 @@
       ev.target.remove();
     }
     const firstLetterToUpperCase = string => string[0].toUpperCase() + string.substring(1);
-
+    const colourArray = ['Red', 'Pink', 'Purple', 'Deep Purple', 'Indigo', 'Blue', 'Light Blue', 'Cyan', 'Teal', 'Green', 'Light Green', 'Lime', 'Yellow', 'Amber', 'Orange', 'Deep Orange', 'Brown', 'Grey', 'Blue Grey', 'Black', 'White'];
+    const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
     (async () => {
       const url = 'http://localhost:5000/api/v1/articles'
       let categories = [];
       const fetchAsyncA = async () => {
-        const articles = await (await fetch(url)).json()
+        const articles = await (await fetch(url)).json();
+        // Step 0: Iterate through all articles and collect the categories. Then give every category a nice color
+        const colourCategories = {};
+        let colourIndex = 0;
+        articles.forEach((article) => {
+          article.categories.forEach((category) => {
+            if (colourCategories[category] === undefined) {
+              colourCategories[category] = colourArray[colourIndex];
+              colourIndex += 1;
+              if (colourIndex === colourArray.length) colourIndex = 0;
+            }
+          });
+        });
+        // Step 1: Fill articles into table
         const table = document.getElementById('articletable');
         let counter = articles.length;
         articles.forEach((article) => {
@@ -224,8 +197,9 @@
           const keywords = row.insertCell(2);
           let html = "";
           article.categories.forEach((category) => {
-            html += `<span class="badge standard">${firstLetterToUpperCase(category)}</span>`;
             categories.push(category);
+            const colour = colourCategories[category];
+            html += `<span class="badge" style="background-color: ${palette.get(colour, '700')};color:${palette.getText(colour, '500', 'Secondary')};font-size:87%;">${firstLetterToUpperCase(category)}</span>`;
           });
           article.keywords.forEach((keyword) => {
             html += `<div class="inline keyword" ondrop="drop(event)" ondragover="allowDrop(event)" ondblclick="removeKeyword(event)">${keyword}</div>`;
@@ -233,26 +207,18 @@
           keywords.innerHTML = html;
           counter -= 1;
         });
-        categories = categories.filter((e, i) => categories.indexOf(e) === i);
+        // Step 2: Show used categories at the top
+        categories = categories.filter((e, i) => categories.indexOf(e) === i);  // Kill duplicates
         const labels = document.getElementById('labelselect');
         categories.forEach((category) => {
-          const html = `<span class="badge standard" id="standard-label" draggable="true" ondragstart="drag(event)">${firstLetterToUpperCase(category)}</span>`
+          const colour = colourCategories[category];
+          const html = `<span class="badge" style="background-color: ${palette.get(colour, '700')};color:${palette.getText(colour, '500', 'Secondary')};font-size:87%;" draggable="true" ondragstart="drag(event)">${firstLetterToUpperCase(category)}</span>`
           labels.innerHTML += html;
         });
       }
       fetchAsyncA();
     })();
 
-    document.getElementsByName('addlabel').forEach((elem) => {
-      elem.addEventListener('click', (event) => {
-        const div = document.getElementById('modal-labels-set');
-        div.innerHTML = `<p>Existing labels: </p>`;
-        const childs = event.target.parentElement.parentElement.children[0].children;
-        for (let label of childs) {
-          div.innerHTML += `${label.outerHTML} `;
-        };
-      });
-    })
 
   </script>
 </body>
