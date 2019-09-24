@@ -27,6 +27,8 @@ paths:
               properties:
                 url:
                   type: "string"
+                id:
+                  type: "string"
                 title:
                   type: "string"
                 keywords:
@@ -45,20 +47,44 @@ paths:
         - "Categories"
       summary: "Adds the category to the categories set from the given keyword"
       parameters:
-      - name: keyword
-        in: path
-        description: Keyword that should get updated
-        type: string
-        required: True
-      - name: category
-        in: body
-        required: True
-        schema:
-          type: object
-          properties:
-            category:
-              type: string
-              description: Category to be added
+        - name: keyword
+          in: path
+          description: Keyword that should get updated
+          type: string
+          required: True
+        - name: category
+          in: body
+          required: True
+          schema:
+            type: object
+            properties:
+              category:
+                type: string
+                description: Category to be added
       responses:
         200:
           description: "Added category"
+  /article/{id}:
+    patch:
+      operationId: "api.remove_keyword"
+      tags:
+        - "Keywords"
+      summary: "Remove a keyword from the keyword list which gets associated with the article id"
+      parameters:
+        - name: id
+          in: path
+          description: id from article that should get removed
+          type: string
+          required: True
+        - name: keyword
+          in: body
+          required: True
+          schema:
+            type: object
+            properties:
+              keyword:
+                type: string
+                description: Keyword to be removed
+      responses:
+        200:
+          description: "Keyword got removed"

@@ -196,12 +196,18 @@
       const category = nodeCopy.innerText;
       ev.target.innerHTML = "";
       ev.target.appendChild(nodeCopy);
-      console.log(keyword)
-      console.log(category)
       updateKeyword(keyword, category);
     }
     function remove(ev) {
       ev.target.remove()
+    }
+    function removeKeyword(ev) {
+      const keyword = ev.target.innerText;
+      const id = ev.path[2].cells[1].children[0].dataset.id;
+      fetch(`http://localhost:5000/api/v1/article/${id}`, { body: JSON.stringify({ "keyword": keyword }), method: "PATCH", headers: { 'Content-Type': 'application/json' } }).then((response) => {
+        console.log(response);
+      });
+      ev.target.remove();
     }
     const firstLetterToUpperCase = string => string[0].toUpperCase() + string.substring(1);
 
@@ -215,14 +221,14 @@
 
           const row = table.insertRow(0);
           const index = row.insertCell(0).innerHTML = counter;
-          const title = row.insertCell(1).innerHTML = `<a href="${article.url}">${article.title}</a>`;
+          const title = row.insertCell(1).innerHTML = `<a href="${article.url}" data-id="${article.id}">${article.title}</a>`;
           const keywords = row.insertCell(2);
           let html = ""
           article.categories.forEach((category) => {
             html += `<span class="badge standard">${firstLetterToUpperCase(category)}</span>`
           });
           article.keywords.forEach((keyword) => {
-            html += `<div class="inline keyword" ondrop="drop(event)" ondragover="allowDrop(event)" ondblclick="remove(event)">${keyword}</div>`;
+            html += `<div class="inline keyword" ondrop="drop(event)" ondragover="allowDrop(event)" ondblclick="removeKeyword(event)">${keyword}</div>`;
           });
           keywords.innerHTML = html;
           counter -= 1;

@@ -1,3 +1,4 @@
+from bson.objectid import ObjectId
 from pymongo import MongoClient
 from article import Article
 client = MongoClient()
@@ -28,6 +29,11 @@ def update_keyword(keyword, category):
         {"keyword": keyword}, {"$addToSet": {"categories": category}}, upsert=True)
 
 
+def remove_keyword(id, keyword):
+    articles_collection.update_one(
+        {"_id": ObjectId(id)}, {"$pull": {"keywords": keyword}})
+
+
 def get_categories(keyword):
     result = keywords_collection.find_one({"keyword": keyword})
     if result is not None:
@@ -46,3 +52,4 @@ def get_articles():
 
 def get_articles_json():
     return list(articles_collection.find({}))
+
