@@ -161,6 +161,7 @@
       const div = document.getElementById('labelselect');
       const html = `<span class="badge ${labelclass} standard" id="${labelclass}-label" draggable="true" ondragstart="drag(event)">${labelName}</span>`;
       div.innerHTML += html;
+      document.getElementById('newLabelInput').value = '';
       document.getElementById('cancelButton').click();
     }
 
@@ -175,14 +176,12 @@
       /* Here we allow it by preventing the default behaviour. */
       ev.preventDefault();
     }
-
     function drag(ev) {
       /* Here is specified what should be dragged. */
       /* This data will be dropped at the place where the mouse button is released */
       /* Here, we want to drag the element itself, so we set it's ID. */
       ev.dataTransfer.setData('text/html', ev.target.id);
     }
-
     function drop(ev) {
       ev.preventDefault();
       var data = ev.dataTransfer.getData('text/html');
@@ -213,25 +212,32 @@
 
     (async () => {
       const url = 'http://localhost:5000/api/v1/articles'
+      let categories = [];
       const fetchAsyncA = async () => {
         const articles = await (await fetch(url)).json()
         const table = document.getElementById('articletable');
         let counter = articles.length;
         articles.forEach((article) => {
-
           const row = table.insertRow(0);
           const index = row.insertCell(0).innerHTML = counter;
           const title = row.insertCell(1).innerHTML = `<a href="${article.url}" data-id="${article.id}">${article.title}</a>`;
           const keywords = row.insertCell(2);
-          let html = ""
+          let html = "";
           article.categories.forEach((category) => {
-            html += `<span class="badge standard">${firstLetterToUpperCase(category)}</span>`
+            html += `<span class="badge standard">${firstLetterToUpperCase(category)}</span>`;
+            categories.push(category);
           });
           article.keywords.forEach((keyword) => {
             html += `<div class="inline keyword" ondrop="drop(event)" ondragover="allowDrop(event)" ondblclick="removeKeyword(event)">${keyword}</div>`;
           });
           keywords.innerHTML = html;
           counter -= 1;
+        });
+        categories = categories.filter((e, i) => categories.indexOf(e) === i);
+        const labels = document.getElementById('labelselect');
+        categories.forEach((category) => {
+          const html = `<span class="badge standard" id="standard-label" draggable="true" ondragstart="drag(event)">${firstLetterToUpperCase(category)}</span>`
+          labels.innerHTML += html;
         });
       }
       fetchAsyncA();
@@ -247,7 +253,6 @@
         };
       });
     })
-
 
   </script>
 </body>
