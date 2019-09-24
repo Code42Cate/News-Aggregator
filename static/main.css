@@ -1,0 +1,59 @@
+html {
+    min-height: 100%;
+}
+
+body {
+    background-color: #343a40;
+    height: 100%;
+}
+
+.all {
+    background-color: #007bff;
+    color: white;
+}
+
+div.inline {
+    float: left;
+}
+
+div.keyword {
+    margin-left: 5px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    /* webkit (safari, chrome) browsers */
+    -moz-user-select: none;
+    /* mozilla browsers */
+    -khtml-user-select: none;
+    /* webkit (konqueror) browsers */
+    -ms-user-select: none;
+    /* IE10+ */
+}
+
+.badge {
+    cursor: pointer;
+    margin: 3px;
+    font-weight: 900;
+    font-size: 87%;
+    float: left;
+}
+
+a {
+    color: cornflowerblue;
+}
+
+#articletable {
+    background-color: #343a40;
+}
+
+.modal-content {
+    background-color: #343a40;
+    color: white;
+}
+
+.modal-header {
+    border-bottom: 1px solid black;
+}
+
+.modal-footer {
+    border: none;
+}
