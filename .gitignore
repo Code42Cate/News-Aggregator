@@ -10,3 +10,4 @@ newsletter.html
 .VSCodeCounter
 *.pyc
 */*.pyc
+tests/node_modules

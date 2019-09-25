@@ -25,7 +25,7 @@ The results of getting into a bubble where, that I only got the most boring main
 |ReadWrite|nytimes|
 |thenextweb|time|
 |Techradar|bbc|
-||cnet|
+|cnet|
 
 ## TODO:
 
@@ -50,6 +50,17 @@ The results of getting into a bubble where, that I only got the most boring main
     - [Newspaper](https://github.com/codelucas/newspaper) for the article scraping
 - Database: [mongoDB](https://www.mongodb.com/)
 - Frontend: JavaScript and [Bootstrap 4.0](https://getbootstrap.com/), also using the [google material colour palette](https://github.com/8lueberry/google-material-color/)
+
+- Testing: [pyunit](https://wiki.python.org/moin/PyUnit) for python backend testing and [puppeteer](https://github.com/GoogleChrome/puppeteer) with [node.js](https://nodejs.org/en/) for frontend testing
+
+
+## Requirements for local environment
+
+- Installation of [mongoDB](https://www.mongodb.com/)
+- Python 3.7+
+- Node.js (I am using v10, not sure how long you can go. ES6 is required!)
+
+
 ## You want to add your own scrapers for your favourite site?
 All the scrapers are in the `scraper/` directory.
 
@@ -66,6 +77,8 @@ Feel free to add more tests:D
 This project is using pyunit for unit tests. Go into the root directory of this project and run: 
 
 `python3 -m unittest discover`
+
+I am also using node.js and puppeteer for some frontend testing. Run them with `npm run` in the testing folder.
 
 ## Acknowledgments
 Thank you:

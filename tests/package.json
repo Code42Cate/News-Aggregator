@@ -1,0 +1,32 @@
+{
+  "name": "frontend-tests",
+  "version": "1.0.0",
+  "description": "A suite of tests using puppeteer for my news aggregator frontend",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Code42Cate/google-news-sucks.git"
+  },
+  "keywords": [
+    "testing",
+    "puppeteer",
+    "flask"
+  ],
+  "author": "Jonas Scholz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Code42Cate/google-news-sucks/issues"
+  },
+  "homepage": "https://github.com/Code42Cate/google-news-sucks#readme",
+  "dependencies": {
+    "puppeteer": "^1.20.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.4.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  }
+}
