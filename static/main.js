@@ -25,14 +25,14 @@ function addNewLabel() {
 
 function updateKeyword(keyword, category) {
   fetch(`http://localhost:5000/api/v1/categories/${keyword}`, {
-    body: JSON.stringify({
-      "category": category
-    }),
-    method: "PATCH",
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
+      body: JSON.stringify({
+        "category": category
+      }),
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
     .then((response) => {
       console.log(response);
     });
@@ -72,18 +72,45 @@ function remove(ev) {
   ev.target.remove()
 }
 
+function showKeywords(ev) {
+  const collapsed = ev.path[2].cells[1].children[0].dataset.collapsed;
+  if (collapsed === 'true') {
+    ev.path[2].cells[1].children[0].dataset.collapsed = false;
+    const id = ev.path[2].cells[1].children[0].dataset.id;
+    articles.forEach((article) => {
+      let html = '';
+      if (article.id === id) {
+        article.keywords.forEach((keyword) => {
+          html += `<div class="inline keyword" ondrop="drop(event)" ondragover="allowDrop(event)" ondblclick="removeKeyword(event)">${keyword}</div>`;
+        });
+        ev.target.parentElement.innerHTML += html;
+      }
+    });
+  } else {
+    ev.path[2].cells[1].children[0].dataset.collapsed = true;
+    let remove = [];
+    for (let item of ev.target.parentElement.children) {
+      if (item.classList.contains('keyword')) remove.push(item);
+    }
+    for (let item of remove) {
+      item.remove();
+    }
+  }
+
+}
+
 function removeKeyword(ev) {
   const keyword = ev.target.innerText;
   const id = ev.path[2].cells[1].children[0].dataset.id;
   fetch(`http://localhost:5000/api/v1/article/${id}`, {
-    body: JSON.stringify({
-      "keyword": keyword
-    }),
-    method: "PATCH",
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
+      body: JSON.stringify({
+        "keyword": keyword
+      }),
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
     .then((response) => {
       console.log(response);
     });
@@ -92,11 +119,12 @@ function removeKeyword(ev) {
 const firstLetterToUpperCase = string => string[0].toUpperCase() + string.substring(1);
 const colourArray = ['Red', 'Pink', 'Purple', 'Deep Purple', 'Indigo', 'Blue', 'Light Blue', 'Cyan', 'Teal', 'Green', 'Light Green', 'Lime', 'Yellow', 'Amber', 'Orange', 'Deep Orange', 'Brown', 'Grey', 'Blue Grey', 'Black', 'White'];
 const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+let articles;
 (async () => {
   const url = 'http://localhost:5000/api/v1/articles'
   let categories = [];
   const fetchAsyncA = async () => {
-    const articles = await (await fetch(url))
+    articles = await (await fetch(url))
       .json();
     // Step 0: Iterate through all articles and collect the categories. Then give every category a nice color
     const colourCategories = {};
@@ -118,8 +146,10 @@ const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
       const index = row.insertCell(0)
         .innerHTML = counter;
       const title = row.insertCell(1)
-        .innerHTML = `<a href="${article.url}" data-id="${article.id}">${article.title}</a>`;
+        .innerHTML = `<a href="${article.url}" data-id="${article.id}" data-collapsed="true" >${article.title}</a>`;
       const keywords = row.insertCell(2);
+      keywords.className += (keywords.className ? ' ' : '') + 'keywords';
+
       let html = "";
       article.categories.forEach((category) => {
         categories.push(category);
@@ -130,6 +160,8 @@ const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
         article.keywords.forEach((keyword) => {
           html += `<div class="inline keyword" ondrop="drop(event)" ondragover="allowDrop(event)" ondblclick="removeKeyword(event)">${keyword}</div>`;
         });
+      } else if (article.keywords.length > 0) {
+        html += `<span class="badge" style="background-color: #424242;color:#fff;font-size:87%;" onclick="showKeywords(event)";>...</span>`;
       }
 
       keywords.innerHTML = html;

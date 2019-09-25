@@ -43,6 +43,11 @@ a {
 
 #articletable {
     background-color: #343a40;
+    table-layout: fixed;
+}
+
+.keywords {
+    width: 50%;
 }
 
 .modal-content {
