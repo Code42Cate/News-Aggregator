@@ -32,11 +32,13 @@ The results of getting into a bubble where, that I only got the most boring main
 - Figure out how we can prevent timeouts (and handle other errors) from all the sites
     (Might wanna use proxies?)
 - Figure out how the fuck asyncio works so I can make the main scraping loop in async:D
-- Make the newsletter template a little bit more beautiful
 - Figure out how to close failing connections
 - Figure out how to handle exceptions in the scrapers, it would be good if people who implement scrapers do not need to do worry about that
-- Write an API which the newsletter frontend can use
 - Add filtering options for frontend
+- Work on site performance
+- Make it production ready!
+- Write more tests, also for the frontend
+- Make it possible to scroll while dragging
 
 ## Tech Stack
 
