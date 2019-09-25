@@ -16,6 +16,7 @@ function addNewLabel() {
     .toLowerCase();
   const div = document.getElementById('labelselect');
   const colour = colourArray[colourIndex];
+  colourIndex += 1;
   const html = `<span class="badge ${labelclass}" id="${labelclass}-label" draggable="true" ondragstart="drag(event)" style="background-color: ${palette.get(colour, '700')};color:${palette.getText(colour, '500', 'Secondary')}">${labelName}</span>`;
   div.innerHTML += html;
   document.getElementById('newLabelInput')
