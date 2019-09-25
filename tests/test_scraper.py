@@ -25,7 +25,7 @@ class TestAllScraperNoInternet(unittest.TestCase):
     There is still a problem because some sockets arent getting closed properly, not sure how to fix that right now
     I should also introduce a better error handling system for all the scrapers in general
     """
-
+    @unittest.skip("Skipping because it is taking too long.")
     def testAllScraperNoConnection(self):
         articles = []
         for Scraper in SiteScraper.__subclasses__():
@@ -34,6 +34,7 @@ class TestAllScraperNoInternet(unittest.TestCase):
 
 
 class TestAllScraperOutput(unittest.TestCase):
+    @unittest.skip("Skipping because it is taking too long.")
     def testTupleOutput(self):
         # Basially our header, should always be the same format. Currently: ("url", "title")
         tuple_size = len(SiteScraper().scrape().get_articles()[0])
@@ -42,6 +43,7 @@ class TestAllScraperOutput(unittest.TestCase):
             for article in articles:
                 self.assertEqual(tuple_size, len(article))
 
+    @unittest.skip("Skipping because it is taking too long.")
     def testURLOutput(self):
         for Scraper in SiteScraper.__subclasses__():
             articles = Scraper().scrape().get_articles()
