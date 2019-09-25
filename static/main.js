@@ -158,7 +158,7 @@ let articles;
         const colour = colourCategories[category];
         html += `<span class="badge" style="background-color: ${palette.get(colour, '700')};color:${palette.getText(colour, '500', 'Secondary')};font-size:87%;">${firstLetterToUpperCase(category)}</span>`;
       });
-      if (article.categories.length < 2) {
+      if (article.categories.length < 1) {
         article.keywords.forEach((keyword) => {
           html += `<div class="inline keyword" ondrop="drop(event)" ondragover="allowDrop(event)" ondblclick="removeKeyword(event)">${keyword}</div>`;
         });
