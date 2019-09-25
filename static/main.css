@@ -45,14 +45,17 @@ a {
     background-color: #343a40;
     table-layout: fixed;
 }
+
 .page-link {
     background-color: #313131;
     color: red;
     border: 0px;
 }
+
 .page-link:hover {
     background-color: #424242;
 }
+
 .keywords {
     width: 50%;
 }
@@ -68,4 +71,8 @@ a {
 
 .modal-footer {
     border: none;
+}
+
+#pagination {
+    visibility: hidden;
 }

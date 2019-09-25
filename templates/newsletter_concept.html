@@ -12,14 +12,16 @@
 </head>
 
 <body>
+  <!--Label Selection-->
   <div>
     <div id="labelselect" class="inline">
       <span class="badge all" id="all-label" draggable="true" ondragstart="drag(event)">All</span>
     </div>
-    <div class="inline" style="margin-left: 3px;"> <span class="badge badge-primary" id="addlabel" data-toggle="modal"
+    <div class="inline"> <span class="badge badge-primary" id="addlabel" data-toggle="modal"
         data-target="#labelmodal">Add
         Label</span></div>
   </div>
+  <!--Articles Table-->
   <table class="table table-hover table-dark">
     <thead>
       <tr>
@@ -54,12 +56,12 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelButton">Cancel</button>
-          <button type="button" class="btn btn-primary" onclick="addNewLabel();">Add Label</button>
+          <button type="button" class="btn btn-primary" onclick="addNewLabel()">Add Label</button>
         </div>
       </div>
     </div>
   </div>
-  <div style="visibility:hidden;" id="pagination">
+  <div id="pagination">
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
         <li class="page-item">
