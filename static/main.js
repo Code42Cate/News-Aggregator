@@ -130,6 +130,7 @@ function removeKeyword(ev) {
 }
 // Function that gets called by the pagination buttons with either + or - 20
 function loadArticles(i) {
+  document.getElementById('pagination').style.visibility = 'hidden';
   if (index + i > 0) { // if we get < 0, we want to show negative amount of articles? tf? dont do that >:(
     document.getElementById('articletable')
       .innerHTML = ''; // clear article table
