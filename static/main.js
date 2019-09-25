@@ -60,11 +60,11 @@ function drop(ev) {
   var nodeCopy = document.getElementById(data)
     .cloneNode(true);
   nodeCopy.removeAttribute('id'); /* We cannot use the same ID */
-  nodeCopy.addEventListener('dblclick', remove);
+  nodeCopy.removeAttribute('draggable');
+  nodeCopy.removeEventListener('dragstart', drag);
   const keyword = ev.target.innerText;
   const category = nodeCopy.innerText;
-  ev.target.innerHTML = "";
-  ev.target.appendChild(nodeCopy);
+  ev.target.parentNode.replaceChild(nodeCopy, ev.target);
   updateKeyword(keyword, category);
 }
 
@@ -126,9 +126,12 @@ const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
         const colour = colourCategories[category];
         html += `<span class="badge" style="background-color: ${palette.get(colour, '700')};color:${palette.getText(colour, '500', 'Secondary')};font-size:87%;">${firstLetterToUpperCase(category)}</span>`;
       });
-      article.keywords.forEach((keyword) => {
-        html += `<div class="inline keyword" ondrop="drop(event)" ondragover="allowDrop(event)" ondblclick="removeKeyword(event)">${keyword}</div>`;
-      });
+      if (article.categories.length < 2) {
+        article.keywords.forEach((keyword) => {
+          html += `<div class="inline keyword" ondrop="drop(event)" ondragover="allowDrop(event)" ondblclick="removeKeyword(event)">${keyword}</div>`;
+        });
+      }
+
       keywords.innerHTML = html;
       counter -= 1;
     });
