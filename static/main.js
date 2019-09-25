@@ -15,7 +15,8 @@ function addNewLabel() {
   const labelclass = labelName.replace(" ", "")
     .toLowerCase();
   const div = document.getElementById('labelselect');
-  const html = `<span class="badge ${labelclass} standard" id="${labelclass}-label" draggable="true" ondragstart="drag(event)">${labelName}</span>`;
+  const colour = colourArray[colourIndex];
+  const html = `<span class="badge ${labelclass}" id="${labelclass}-label" draggable="true" ondragstart="drag(event)" style="background-color: ${palette.get(colour, '700')};color:${palette.getText(colour, '500', 'Secondary')}">${labelName}</span>`;
   div.innerHTML += html;
   document.getElementById('newLabelInput')
     .value = '';
@@ -118,7 +119,7 @@ function removeKeyword(ev) {
 }
 const firstLetterToUpperCase = string => string[0].toUpperCase() + string.substring(1);
 const colourArray = ['Red', 'Pink', 'Purple', 'Deep Purple', 'Indigo', 'Blue', 'Light Blue', 'Cyan', 'Teal', 'Green', 'Light Green', 'Lime', 'Yellow', 'Amber', 'Orange', 'Deep Orange', 'Brown', 'Grey', 'Blue Grey', 'Black', 'White'];
-const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+let colourIndex = 0;
 let articles;
 (async () => {
   const url = 'http://localhost:5000/api/v1/articles'
