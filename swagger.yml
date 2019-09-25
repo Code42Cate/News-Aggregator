@@ -11,13 +11,19 @@ produces:
 basePath: "/api/v1"
 
 paths:
-  /articles:
+  /articles/{index}:
     get:
       operationId: "api.get_articles"
       tags:
         - "Articles"
       summary: "The articles data structure supported by the server application, without content of the articles"
       description: "Read complete list of articles"
+      parameters:
+      - name: index
+        in: path
+        description: articles[-index:-index+20]
+        type: integer
+        required: True
       responses:
         200:
           description: "Successful read articles list operation"

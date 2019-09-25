@@ -7,8 +7,12 @@ def remove_keyword(id, keyword):
     database.remove_keyword(id, keyword["keyword"])
 
 
-def get_articles():
-    articles = database.get_articles_json()[:20]
+def get_articles(index):
+    articles = database.get_articles_json()
+    articles = articles[len(articles) - index:len(articles) - index + 20]
+    for article in articles:
+        print(article["_id"].generation_time)
+
     for article in articles:
         del article["content"]
         article["id"] = str(article["_id"])

@@ -54,10 +54,28 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelButton">Cancel</button>
-          <button type="button" class="btn btn-primary" onclick="addNewLabel();">Save changes</button>
+          <button type="button" class="btn btn-primary" onclick="addNewLabel();">Add Label</button>
         </div>
       </div>
     </div>
+  </div>
+  <div style="visibility:hidden;" id="pagination">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous" onclick="loadArticles(-20)">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next" onclick="loadArticles(20)">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

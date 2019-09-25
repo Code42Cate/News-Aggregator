@@ -118,12 +118,23 @@ function removeKeyword(ev) {
     });
   ev.target.remove();
 }
+
+function loadArticles(i) {
+  if (index + i > 0) {
+    document.getElementById('articletable').innerHTML = '';
+    document.getElementById('labelselect').innerHTML = '<span class="badge all" id="all-label" draggable="true" ondragstart="drag(event)">All</span>';
+    index += i;
+    load();
+  }
+}
+
 const firstLetterToUpperCase = string => string[0].toUpperCase() + string.substring(1);
 const colourArray = ['Red', 'Pink', 'Purple', 'Deep Purple', 'Indigo', 'Blue', 'Light Blue', 'Cyan', 'Teal', 'Green', 'Light Green', 'Lime', 'Yellow', 'Amber', 'Orange', 'Deep Orange', 'Brown', 'Grey', 'Blue Grey', 'Black', 'White'];
 let colourIndex = 0;
 let articles;
-(async () => {
-  const url = 'http://localhost:5000/api/v1/articles'
+let index = 20;
+const load = async () => {
+  const url = `http://localhost:5000/api/v1/articles/${index}`;
   let categories = [];
   const fetchAsyncA = async () => {
     articles = await (await fetch(url))
@@ -177,6 +188,8 @@ let articles;
       const html = `<span class="badge" id="${category}" style="background-color: ${palette.get(colour, '700')}; color:${palette.getText(colour, '500', 'Secondary')}; font-size:87%;" draggable="true" ondragstart="drag(event)">${firstLetterToUpperCase(category)}</span>`
       labels.innerHTML += html;
     });
+    document.getElementById('pagination').style.visibility = 'visible';
   }
   fetchAsyncA();
-})();
+}
+load();
