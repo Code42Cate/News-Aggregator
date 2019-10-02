@@ -76,3 +76,6 @@ a {
 #pagination {
     visibility: hidden;
 }
+#modal-labels-set {
+    margin-bottom: 40px;
+}
