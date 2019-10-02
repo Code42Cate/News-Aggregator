@@ -1,65 +1,66 @@
-# Google News s****
+# News Aggregator
 
-This project is the solution to my frustration which Google News caused for way too long.
+This project is the solution to my frustration which most news sites/aggregators I used caused for way too long.
 
-I read a lot of news articles everyday, but I usually don't have the time to scout on multiple news site for articles that interest me. So I've been using different news aggregator sites for a long time, up until now Google News on my phone was the best choice.
+I read a lot of news articles everyday, but I usually don't have the time to scout on multiple news site for articles that interest me.
 
+The problem with many news sites is, that their algorithms are way too freaking sensitive and like to put mit into annoying bubbles.
 
-The problem with Google News was, that their ********* algorithms are way too ********* sensitive and whenever I read any controversial article I instantly saw how hard they are trying to put me into a bubble.
-The results of getting into a bubble where, that I only got the most boring mainstream articles about the same topics, _every freaking day_. I don't know you, but I read to learn about new topics and to think about different perspectives/opinions, not to get confirmation by 100s of articles every day that my opinion is the correct one >:(
+Don't know about you, but I don't like bubbles:(
+
 
 ### Okay, enough rant. We have a problem? Whats the solution?
 ### Let's build our own news aggregator!
-|Supported Sites|Planned Additional Sites|
-|---|---|
-|Hackernews|The Verge|
-|Hackernoon|Mashable|
-|Reddit|Engadget|
-|TechCrunch|ArsTechnica|
-|TechRepublic|Vox|
-|Wired|MakeUseOf|
-|XKCD|TechMeme|
-|yCombinator|Buzzfeednews|
-|Slashdot|Inquisitr|
-|Digg|businessInsider|
-|ReadWrite|nytimes|
-|thenextweb|time|
-|Techradar|bbc|
-|cnet|
+| Supported Sites | Planned Additional Sites |
+|-----------------|--------------------------|
+| Hackernews      | The Verge                |
+| Hackernoon      | Mashable                 |
+| Reddit          | Engadget                 |
+| TechCrunch      | ArsTechnica              |
+| TechRepublic    | Vox                      |
+| Wired           | MakeUseOf                |
+| XKCD            | TechMeme                 |
+| yCombinator     | Buzzfeednews             |
+| Slashdot        | Inquisitr                |
+| Digg            | businessInsider          |
+| ReadWrite       | nytimes                  |
+| thenextweb      | time                     |
+| Techradar       | bbc                      |
+| cnet            |                          |
 
-## TODO:
+## How does it work?
 
-### Backend:
-- Figure out how we can prevent timeouts (and handle other errors) from all the sites
-    (Might wanna use proxies?)
-- Figure out how the fuck asyncio works so I can make the main scraping loop in async:D
-- Figure out how to close failing connections
-- Figure out how to handle exceptions in the scrapers, it would be good if people who implement scrapers do not need to do worry about that
-- Make it production ready!
-- Write more tests
-### Frontend:
-- Write more tests
-- Add filtering options for frontend
-- Work on site performance
-- Make it possible to scroll while dragging
+Yeyee coming tonight:D
 
 ## Tech Stack
 
 - Backend Language: Python 3.7
     - [Flask](https://github.com/pallets/flask) && [Connexion](https://github.com/zalando/connexion) as Webserver / API
-    - [Newspaper](https://github.com/codelucas/newspaper) for the article scraping
+    - [Newspaper](https://github.com/codelucas/newspaper) for the text scraping
 - Database: [mongoDB](https://www.mongodb.com/)
 - Frontend: JavaScript and [Bootstrap 4.0](https://getbootstrap.com/), also using the [google material colour palette](https://github.com/8lueberry/google-material-color/)
 
 - Testing: [pyunit](https://wiki.python.org/moin/PyUnit) for python backend testing and [puppeteer](https://github.com/GoogleChrome/puppeteer) with [node.js](https://nodejs.org/en/) for frontend testing
+
+## Screenshots
+Since I am only running it locally in my dev environment and you might want to see how the frontend looks:
+
+![alt text][main]
+
+If you click on 'Add Label' this shows up:
+
+![alt text][modal]
+
+[main]: docs/main.png "Landing Page with article table"
+[modal]: docs/modal.png "'Add label' popup modal"
 
 
 ## Requirements for local environment
 
 - Installation of [mongoDB](https://www.mongodb.com/)
 - Python 3.7+
-- Node.js (I am using v10, not sure how long you can go. ES6 is required!)
-
+- Node.js (I am using v10, not sure how far back you can go. ES6 is required!)
+- And more stuff, an installation script is coming some time in the future
 
 ## You want to add your own scrapers for your favourite site?
 All the scrapers are in the `scraper/` directory.
@@ -78,10 +79,24 @@ This project is using pyunit for unit tests. Go into the root directory of this 
 
 `python3 -m unittest discover`
 
-I am also using node.js and puppeteer for some frontend testing. Run them with `npm run` in the testing folder.
+I am also using node.js and puppeteer for some frontend testing. Run them with `npm run` in the testing folder. (You need to run `python3 api.py` before and might want to update your database with `python3 scrape.py` first!)
 
-## Acknowledgments
-Thank you:
-    
-    Django Team for the beautiful domain regex
-    SimonJ && Dirtykingballa for the mental help:D
+## TODO:
+
+### Backend:
+- Figure out how we can prevent timeouts (and handle other errors) from all the sites
+    (Might wanna use proxies?)
+- Figure out how the fuck asyncio works so I can make the main scraping loop in async:D
+- Figure out how to close failing connections
+- Figure out how to handle exceptions in the scrapers, it would be good if people who implement scrapers do not need to do worry about that
+- Make it production ready!
+- Write more tests
+### Frontend:
+- Write more tests
+- Add filtering options for frontend
+- Work on site performance
+- Make it possible to scroll while dragging
+- Send the delete requests in batches
+
+## Authors
+* **Jonas Scholz** - [Code42Cate](https://github.com/Code42Cate)
