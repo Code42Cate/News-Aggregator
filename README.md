@@ -1,3 +1,5 @@
+_This project is not even close to being where I want it to be, but its already usable in a local environment_
+
 # News Aggregator
 
 This project is the solution to my frustration which most news sites/aggregators I used caused for way too long.
