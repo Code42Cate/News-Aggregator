@@ -1,5 +1,5 @@
 // Event Listener for the Add Label Badge which opens the modal
-function addLabelEventListener(event) {
+const addLabelEventListener = (event) => {
   const div = document.getElementById('modal-labels-set');
   div.innerHTML = `<p>Existing labels: </p>`;
   // Get all the labels which are getting used on the current page (Or atleast those, which are on the top of the page) and display them in the modal
@@ -7,12 +7,12 @@ function addLabelEventListener(event) {
   for (let label of childs) {
     div.innerHTML += `${label.outerHTML} `;
   };
-}
+};
 document.getElementById('addlabel')
   .addEventListener('click', addLabelEventListener);
 
 // Function that gets called after clicking Add Label in the new Label modal
-function addNewLabel() {
+const addNewLabel = () => {
   const labelName = document.getElementById('newLabelInput')
     .value;
   const labelclass = labelName.replace(" ", "")
@@ -31,9 +31,9 @@ function addNewLabel() {
   // close modal
   document.getElementById('cancelButton')
     .click();
-}
+};
 // send patch request to the server with keyword in path and category in body which should get associated
-async function updateKeyword(keyword, category) {
+const updateKeyword = async (keyword, category) => {
   fetch(`http://localhost:5000/api/v1/categories/${keyword}`, {
       body: JSON.stringify({
         "category": category
@@ -46,30 +46,30 @@ async function updateKeyword(keyword, category) {
     .then((response) => {
       console.log(response);
     });
-}
+};
 
 // Base code for drag and drop from: https://stackoverflow.com/questions/13007582/html5-drag-and-copy
 // Modified to fit my usage
-function allowDrop(ev) {
+const allowDrop = (ev) => {
   /* The default handling is to not allow dropping elements. */
   /* Here we allow it by preventing the default behaviour. */
   ev.preventDefault();
-}
+};
 
-function drag(ev) {
+const drag = (ev) => {
   /* Here is specified what should be dragged. */
   /* This data will be dropped at the place where the mouse button is released */
   /* Here, we want to drag the element itself, so we set it's ID. */
   ev.dataTransfer.setData('text/html', ev.target.id);
-}
+};
 
-function drop(ev) {
+const drop = (ev) => {
   ev.preventDefault();
-  var data = ev.dataTransfer.getData('text/html');
+  const data = ev.dataTransfer.getData('text/html');
   /* If you use DOM manipulation functions, their default behaviour it not to 
      copy but to alter and move elements. By appending a ".cloneNode(true)", 
      you will not move the original element, but create a copy. */
-  var nodeCopy = document.getElementById(data)
+  const nodeCopy = document.getElementById(data)
     .cloneNode(true);
   nodeCopy.removeAttribute('id'); /* We cannot use the same ID */
   nodeCopy.removeAttribute('draggable'); // We dont want the set label to be draggable
@@ -78,10 +78,10 @@ function drop(ev) {
   const category = nodeCopy.innerText;
   ev.target.parentNode.replaceChild(nodeCopy, ev.target); // Replace keyword with label
   updateKeyword(keyword, category); // send request to server
-}
+};
 
 // Function that gets called if you click on the ... Badge next to the labels
-function showKeywords(ev) {
+const showKeywords = (ev) => {
   // check if its collapsed or not
   const collapsed = ev.path[2].cells[1].children[0].dataset.collapsed;
   if (collapsed === 'true') {
@@ -109,10 +109,9 @@ function showKeywords(ev) {
       item.remove();
     }
   }
-
-}
+};
 // gets called on dblclick on a keyword
-function removeKeyword(ev) {
+const removeKeyword = (ev) => {
   const keyword = ev.target.innerText; //keyword to be removed
   const id = ev.path[2].cells[1].children[0].dataset.id; // id of the article
   // send patch request to server with id as path variable and the keyword in the body
@@ -127,9 +126,9 @@ function removeKeyword(ev) {
   });
   // remove keyword from frontend
   ev.target.remove();
-}
+};
 // Function that gets called by the pagination buttons with either + or - 20
-function loadArticles(i) {
+const loadArticles = (i) => {
   document.getElementById('pagination').style.visibility = 'hidden';
   if (index + i > 0) { // if we get < 0, we want to show negative amount of articles? tf? dont do that >:(
     document.getElementById('articletable')
@@ -139,7 +138,7 @@ function loadArticles(i) {
     index += i; // add the indices
     load(); // actually do the loading process
   }
-}
+};
 // Used to display categories / labels more nicely
 const firstLetterToUpperCase = string => string[0].toUpperCase() + string.substring(1);
 // Colour palette used by google material colour palette.
